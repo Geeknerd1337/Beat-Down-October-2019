@@ -53,7 +53,7 @@ public class BPM : MonoBehaviour
             beatFull = true;
             beatCountFull++;
             //Debug.Log("Beat");
-            Debug.Log(songCheck.timeSamples);
+            //Debug.Log(songCheck.timeSamples);
         }
         //Divided beat count
         beatD8 = false;
@@ -89,5 +89,10 @@ public class BPM : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public float GetInterval()
+    {
+        return beatInterval;
     }
 }
