@@ -47,6 +47,7 @@ public class BPM : MonoBehaviour
         beatFull = false;
         beatInterval = 60 / bpm;
         beatTimer += Time.deltaTime;
+
         if(beatTimer >= beatInterval)
         {
             beatTimer -= beatTimer;
