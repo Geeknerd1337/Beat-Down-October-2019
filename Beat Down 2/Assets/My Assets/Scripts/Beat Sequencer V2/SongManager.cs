@@ -5,22 +5,48 @@ using UnityEngine.UI;
 
 public class SongManager : MonoBehaviour
 {
+
+
+    //This gets song position
     private float songPosition;
 
+    //Song position in beats
     private float songPosInBeats;
 
+    //Length of the beats
     private float secPerBeat;
 
+    //Something to keep track of the songs position
     private float dspTimeSong;
 
+    //The BPM for the tracks in the game
     public float BPM;
 
+    //Number of beats currently played
     public float beatCount;
+    public float beatCount2;
 
-    public Image hit;
+
+    //Currently I want to keep track of the beats and measure if the player is tapping with the beat
+
+    //Margin of error that player has to press a note
+    public float judgmentTime;
+
+
+    //beatsAhead to spawn the note timer
+    public float beatsAhead;
+
+    //The timer object
     public GameObject indicator;
-    //Instance of the indicator
     public GameObject indicatorInstance;
+
+
+
+    //Everything else below this line is just debug stuff until I give it an express purpose
+    public Image hit;
+
+    //Instance of the indicator
+    
     public GameObject canvas;
 
 
@@ -62,23 +88,27 @@ public class SongManager : MonoBehaviour
             //calculate the position in beats
             songPosInBeats = songPosition / secPerBeat;
 
-
+            //Uptick the beats when necessary
             if (beatCount < songPosInBeats)
             {
-
-
                 beatCount++;
+                indicatorInstance = Instantiate(indicator, canvas.transform);
+            indicatorInstance.transform.position = hit.transform.position;
+
+        }
 
 
-
-
-                Color tc = hit.color;
-                tc.a = 1;
-                hit.color = tc;
-            }
 
             UpdateHitColor();
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            CheckIfValidTime();
         }
+
+
+    }
 
 
 
@@ -91,6 +121,32 @@ public class SongManager : MonoBehaviour
         }
         hit.color = tc;
     }
+
+
+    bool CheckIfValidTime(){
+        float time = songPosition / secPerBeat;
+        float targetBeat = Mathf.Round(time);
+        //Debug.Log(time);
+        //Debug.Log(beatCount - 1);
+        //Debug.Log(targetBeat);
+        if(time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime)
+        {
+            Debug.Log("True");
+            Color TC = hit.color;
+            TC.a = 1;
+            hit.color = TC;
+            return true;
+        }
+        else
+        {
+            Debug.Log("False");
+            return false;
+        }
+
+    }
+    
+        
+    
 
 
 }

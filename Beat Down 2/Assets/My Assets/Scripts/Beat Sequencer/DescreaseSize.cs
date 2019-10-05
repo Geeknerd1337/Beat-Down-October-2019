@@ -16,7 +16,7 @@ public class DescreaseSize : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = Vector3.Lerp(new Vector3(newScale, newScale, newScale), new Vector3(oldScale, oldScale, oldScale),time/(BPM.BPMInstance.GetInterval()));
+        transform.localScale = Vector3.Lerp(new Vector3(newScale, newScale, newScale), new Vector3(oldScale, oldScale, oldScale), time / 0.48f);
         time += Time.deltaTime;
 
 
