@@ -7,11 +7,31 @@ public class SongManager : MonoBehaviour
 {
 
 
+    #region Singleton
+    public static SongManager ManagerInstance;
+    public void Awake()
+    {
+
+            if (ManagerInstance != null && ManagerInstance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                ManagerInstance = this;
+                DontDestroyOnLoad(this.gameObject);
+            }
+    }
+    #endregion
+
     //This gets song position
     private float songPosition;
 
     //Song position in beats
     private float songPosInBeats;
+
+    //Song position in 1/8th beats
+    private float songPosInBeatsD8;
 
     //Length of the beats
     private float secPerBeat;
@@ -25,6 +45,11 @@ public class SongManager : MonoBehaviour
     //Number of beats currently played
     public float beatCount;
     public float beatCount2;
+    public float beatCountD8;
+
+    //If the beat is full;
+    public bool beatFull = false;
+    public bool beatFullD8 = false;
 
 
     //Currently I want to keep track of the beats and measure if the player is tapping with the beat
@@ -51,7 +76,7 @@ public class SongManager : MonoBehaviour
 
 
     public AudioSource a;
-    public AudioSource b;
+    public List<AudioSource> audioList;
     private float time;
 
     void Start()
@@ -65,7 +90,10 @@ public class SongManager : MonoBehaviour
 
         //start the song
         a.Play();
-        b.Play();
+        foreach(AudioSource audio in audioList)
+        {
+            audio.Play();
+        }
 
 
 
@@ -87,15 +115,28 @@ public class SongManager : MonoBehaviour
 
             //calculate the position in beats
             songPosInBeats = songPosition / secPerBeat;
+            songPosInBeatsD8 = songPosInBeats / (secPerBeat / 4);
 
+
+            //Set beat full to false;
+            beatFull = false;
             //Uptick the beats when necessary
             if (beatCount < songPosInBeats)
             {
+            beatFull = true;
                 beatCount++;
                 indicatorInstance = Instantiate(indicator, canvas.transform);
             indicatorInstance.transform.position = hit.transform.position;
 
-        }
+            }
+
+            //Set beat full D8 to be false
+            /*beatFullD8 = false;
+            if(beatCountD8 < songPosInBeatsD8)
+            {
+                beatCountD8++;
+                beatFullD8 = true;
+            }*/
 
 
 
@@ -123,7 +164,7 @@ public class SongManager : MonoBehaviour
     }
 
 
-    bool CheckIfValidTime(){
+    public bool CheckIfValidTime(){
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
         //Debug.Log(time);
