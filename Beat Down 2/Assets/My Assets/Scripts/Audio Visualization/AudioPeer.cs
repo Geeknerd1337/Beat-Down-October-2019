@@ -9,6 +9,8 @@ public class AudioPeer : MonoBehaviour
     private AudioSource _audioSource;
 
     public float[] _samples = new float[512];
+    public float[] _sampleBuffer = new float[512];
+    private float[] _sampleBudderDecrease = new float[512];
 
     public float[] _freqBand = new float[8];
 
@@ -33,6 +35,7 @@ public class AudioPeer : MonoBehaviour
         GetSpectrumAudioSource();
         MakeFrequencyBands();
         BandBuffer();
+        //SampleBuffer();
         CreateAudioBands();
     }
 
@@ -81,6 +84,23 @@ public class AudioPeer : MonoBehaviour
             {
                 _bandBuffer[g] -= _bufferDecrease[g];
                 _bufferDecrease[g] *= 1.2f;
+            }
+        }
+    }
+
+    void SampleBuffer()
+    {
+        for (int g = 0; g < 512; g++)
+        {
+            if (_samples[g] > _sampleBuffer[g])
+            {
+                _sampleBuffer[g] = _samples[g];
+                _sampleBudderDecrease[g] = 0.005f;
+            }
+            if (_samples[g] < _sampleBuffer[g])
+            {
+                _sampleBuffer[g] -= _sampleBudderDecrease[g];
+                _sampleBudderDecrease[g] *= 1.2f;
             }
         }
     }

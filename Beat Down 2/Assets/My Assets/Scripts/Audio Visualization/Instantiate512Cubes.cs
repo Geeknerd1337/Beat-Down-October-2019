@@ -30,7 +30,7 @@ public class Instantiate512Cubes : MonoBehaviour
             _instanceOfSampleCube.transform.SetParent(transform);
             _instanceOfSampleCube.name = "SampleCube " + i;
             transform.eulerAngles = new Vector3(0, 0 - (360/512f) * i, 0);
-            _instanceOfSampleCube.transform.position = Vector3.forward * 400;
+            _instanceOfSampleCube.transform.position = Vector3.forward * 200;
             _sampleCube[i] = _instanceOfSampleCube;
         }
 
