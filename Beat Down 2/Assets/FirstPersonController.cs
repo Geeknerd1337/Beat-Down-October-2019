@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using UnityStandardAssets.Characters.FirstPerson;
 
-namespace UnityStandardAssets.Characters.FirstPerson
-{
+
     [RequireComponent(typeof (CharacterController))]
     [RequireComponent(typeof (AudioSource))]
     public class FirstPersonController : MonoBehaviour
@@ -42,6 +42,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+
+        //Adding a reference to the song manager, if it exists so that we can do control based stuff to the music
+        private SongManager songManager;
+        private bool onBeat;
         // Use this for initialization
         private void Start()
         {
@@ -55,6 +59,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            songManager = SongManager.ManagerInstance;
+            onBeat = false;
         }
 
 
@@ -66,6 +73,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                if (m_Jump)
+                {
+                onBeat = songManager.CheckIfValidTime();
+                }
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -115,7 +126,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (m_Jump)
                 {
+                if (!onBeat)
+                {
                     m_MoveDir.y = m_JumpSpeed;
+                }
+                else
+                {
+                    m_MoveDir.y = m_JumpSpeed * 2;
+                }
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
@@ -256,4 +274,4 @@ namespace UnityStandardAssets.Characters.FirstPerson
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
     }
-}
+

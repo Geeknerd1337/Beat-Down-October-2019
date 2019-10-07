@@ -24,6 +24,12 @@ public class GunBase : MonoBehaviour
     public float timeToIncreaseVolume;
     private float timer;
 
+    [Header("Guns that use Visualization")]
+    public bool visualShot;
+    private AudioPeer peer;
+    public float audioCutOff;
+    private bool canShoot = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +42,8 @@ public class GunBase : MonoBehaviour
         songManager.audioList.Add(myAudio);
         //Set my volume down to zero
         myAudio.volume = 0;
+        //Get the peer from my audioSource;
+        peer = GetComponent<AudioPeer>();
     }
 
     // Update is called once per frame
@@ -48,7 +56,10 @@ public class GunBase : MonoBehaviour
         {
             HeldShot();
         }
-        else
+        else if (visualShot)
+        {
+            AudioShot();
+        }else
         {
             TappedShot();
         }
@@ -106,5 +117,29 @@ public class GunBase : MonoBehaviour
     {
         myAudio.volume = Mathf.Lerp(0, 1, timer / timeToIncreaseVolume);
         timer = Mathf.Clamp(timer, 0, timeToIncreaseVolume);
+    }
+
+    void AudioShot()
+    {
+        //This is the event that will check the song manager and do logic for if a shot can be held down and fires as a result of audio visualization
+
+        if (Input.GetMouseButton(0))
+        {
+            timer += Time.deltaTime;
+            if (peer.CheckAllBands(audioCutOff) && canShoot)
+            {
+                Shoot();
+                canShoot = false;
+            }
+            else
+            {
+                canShoot = true;
+            }
+
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+        }
     }
 }

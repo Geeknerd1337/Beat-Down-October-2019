@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class SongManager : MonoBehaviour
 {
@@ -131,12 +132,16 @@ public class SongManager : MonoBehaviour
             }
 
             //Set beat full D8 to be false
-            /*beatFullD8 = false;
+            beatFullD8 = false;
             if(beatCountD8 < songPosInBeatsD8)
             {
                 beatCountD8++;
                 beatFullD8 = true;
-            }*/
+                if(beatCountD8 > 64)
+                {
+                    beatCountD8 = 0;
+                }
+            }
 
 
 
