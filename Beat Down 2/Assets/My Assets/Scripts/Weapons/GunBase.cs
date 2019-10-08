@@ -31,6 +31,20 @@ public class GunBase : MonoBehaviour
     private bool canShoot = true;
 
 
+    [Header("Gun Visual Efffects")]
+    public Transform laserPoint;
+    public GameObject LaserPrefab;
+    public LayerMask layermask;
+
+    [Header("Gun Stats")]
+    public float damage = 10f;
+    public float range = 100f;
+    public float spread = 0f;
+
+ 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,9 +88,35 @@ public class GunBase : MonoBehaviour
 
     void Shoot()
     {
+        RaycastHit hit;
+        Vector3 dir = Camera.main.transform.forward;
+        dir.x += Random.Range(-spread, spread);
+        dir.y += Random.Range(-spread, spread);
+        dir.z += Random.Range(-spread, spread);
+
+
+        GameObject g = Instantiate(LaserPrefab);
+        g.transform.position = laserPoint.position;
+        g.transform.rotation = laserPoint.rotation;
+        g.transform.SetParent(Camera.main.transform);
+
         transform.localRotation = Quaternion.Euler(shotEuler.x, shotEuler.y, shotEuler.z);
         transform.localPosition = idlePosition + shotPosition;
-    }
+
+        if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask))
+        {
+            Target target = hit.transform.GetComponent<Target>();
+            g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0,0, Vector3.Distance(Camera.main.transform.position, hit.point)));
+
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+
+            }
+
+        }
+        
+        }
 
     void HeldShot()
     {

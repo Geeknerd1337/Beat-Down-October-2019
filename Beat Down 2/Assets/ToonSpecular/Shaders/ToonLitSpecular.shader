@@ -14,6 +14,10 @@ Shader "Toon/Lit Specular" {
 			_RimColor("Fresnel Rim Color", Color) = (0.49,0.94,0.64,1)
 	  [Toggle(FADE)] _FADE("Fade specular to bottom?", Float) = 0
 	  _TopBottomOffset("Specular Fade Offset", Range(-4,4)) = 3.2
+	 _DissolveTexture("Dissolve Texture", 2D) = "white" {}
+    _Amount("Amount", Range(0,0.114)) = 0
+	_DissolveColor("Dissolve Color", Color) = (1,1,1,1)
+	_BorderWidth("Border Width", Range(0,1)) = 0
 	}
 
 	SubShader {
@@ -56,9 +60,15 @@ float4 _BottomColor;// bottom gradient color
 float _TopBottomOffset; // gradient bottom offset
 float _Offset; // specular fade offset
 float4 _RimColor; // fresnel rim color
+sampler2D _DissolveTexture;
+half _Amount;
+float4 _DissolveColor;
+half _BorderWidth;
+
 
 struct Input {
 	float2 uv_MainTex : TEXCOORD0;
+	float2 uv_DissolveTexture: TEXCOORD1;
 	float3 lightDir;
 		float3 worldPos; // world position
 		float3 viewDir; // view direction from camera
@@ -71,6 +81,9 @@ void vert(inout appdata_full v, out Input o)
 }
 
 void surf (Input IN, inout SurfaceOutput o) {
+
+    half dissolve_value = tex2D(_DissolveTexture, IN.uv_DissolveTexture).r; //Get how much we have to dissolve based on our dissolve texture
+    clip(dissolve_value - _Amount); //Dissolve!
 	float3 localPos = (IN.worldPos - mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xyz);// local position of the object, with an offset
 	half4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 	half d = dot(o.Normal, IN.lightDir)*0.5 + _SpecOffset; // basing on normal and light direction
@@ -79,6 +92,7 @@ void surf (Input IN, inout SurfaceOutput o) {
 	float rim = 1 - saturate(dot(IN.viewDir, o.Normal)); // calculate fresnel rim
 #if RIM
 	o.Emission = _RimColor.rgb * pow(rim, 1.5); // fresnel rim
+	o.Emission += _DissolveColor.rgb * step( dissolve_value - _Amount, _BorderWidth); //emits white color with 0.05 border size
 #endif
 	o.Albedo = (step(_SpecSize, rampS.r)) * rampS * d* _SColor; // specular
 #if FADE
