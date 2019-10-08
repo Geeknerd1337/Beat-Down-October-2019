@@ -63,6 +63,17 @@ ModelImporter:
     100114: Spider
     100116: //RootNode
     100118: Thorax
+    100120: Abdomen_end_end
+    100122: Fang_L.2_end_end
+    100124: Fang_R.2_end_end
+    100126: Leg1_L.5_end_end
+    100128: Leg1_R.5_end_end
+    100130: Leg2_L.5_end_end
+    100132: Leg2_R.5_end_end
+    100134: Leg3_L.5_end_end
+    100136: Leg3_R.5_end_end
+    100138: Leg4_L.5_end_end
+    100140: Leg4_R.5_end_end
     400000: Abdomen
     400002: Abdomen_end
     400004: Armature
@@ -123,6 +134,17 @@ ModelImporter:
     400114: Spider
     400116: //RootNode
     400118: Thorax
+    400120: Abdomen_end_end
+    400122: Fang_L.2_end_end
+    400124: Fang_R.2_end_end
+    400126: Leg1_L.5_end_end
+    400128: Leg1_R.5_end_end
+    400130: Leg2_L.5_end_end
+    400132: Leg2_R.5_end_end
+    400134: Leg3_L.5_end_end
+    400136: Leg3_R.5_end_end
+    400138: Leg4_L.5_end_end
+    400140: Leg4_R.5_end_end
     2100000: Gem
     4300000: Spider
     9500000: //RootNode
