@@ -41,6 +41,12 @@ public class GunBase : MonoBehaviour
     public float range = 100f;
     public float spread = 0f;
 
+    [Header("Projetile Information")]
+    public bool projectile;
+    public List<GameObject> projectileVfx = new List<GameObject>();
+
+    private GameObject effectTospawn;
+
  
 
 
@@ -58,6 +64,8 @@ public class GunBase : MonoBehaviour
         myAudio.volume = 0;
         //Get the peer from my audioSource;
         peer = GetComponent<AudioPeer>();
+
+        effectTospawn = projectileVfx[0];
     }
 
     // Update is called once per frame
@@ -95,28 +103,58 @@ public class GunBase : MonoBehaviour
         dir.z += Random.Range(-spread, spread);
 
 
-        GameObject g = Instantiate(LaserPrefab);
-        g.transform.position = laserPoint.position;
-        g.transform.rotation = laserPoint.rotation;
-        g.transform.SetParent(Camera.main.transform);
+        GameObject g;
+        g = null;
+
+        if (projectile)
+        {
+            SpawnVFX();
+
+        }
+        else
+        {
+            g = Instantiate(LaserPrefab);
+            g.transform.position = laserPoint.position;
+            g.transform.rotation = laserPoint.rotation;
+            g.transform.SetParent(Camera.main.transform);
+        }
 
         transform.localRotation = Quaternion.Euler(shotEuler.x, shotEuler.y, shotEuler.z);
         transform.localPosition = idlePosition + shotPosition;
 
-        if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask))
+        if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask) && !projectile)
         {
             Target target = hit.transform.GetComponent<Target>();
-            g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0,0, Vector3.Distance(Camera.main.transform.position, hit.point)));
+           
+            
 
             if (target != null)
             {
+                g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, Vector3.Distance(Camera.main.transform.position, hit.point)));
                 target.TakeDamage(damage);
 
             }
 
         }
+
+
+
         
         }
+
+
+    void SpawnVFX()
+    {
+        GameObject vfx;
+        if(laserPoint != null)
+        {
+            vfx = Instantiate(effectTospawn);
+            vfx.transform.SetParent(laserPoint);
+            vfx.transform.localPosition = Vector3.zero;
+            vfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            vfx.transform.SetParent(null);
+        }
+    }
 
     void HeldShot()
     {

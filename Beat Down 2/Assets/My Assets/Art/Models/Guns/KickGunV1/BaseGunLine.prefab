@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5181611389523690236}
   - component: {fileID: 5181611389523690235}
   - component: {fileID: 373049378172928994}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BaseGunLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

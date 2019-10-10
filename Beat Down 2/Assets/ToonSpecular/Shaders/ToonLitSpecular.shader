@@ -15,7 +15,7 @@ Shader "Toon/Lit Specular" {
 	  [Toggle(FADE)] _FADE("Fade specular to bottom?", Float) = 0
 	  _TopBottomOffset("Specular Fade Offset", Range(-4,4)) = 3.2
 	 _DissolveTexture("Dissolve Texture", 2D) = "white" {}
-    _Amount("Amount", Range(0,0.114)) = 0
+    _Amount("Amount", Range(-0.1,0.114)) = 0
 	_DissolveColor("Dissolve Color", Color) = (1,1,1,1)
 	_BorderWidth("Border Width", Range(0,1)) = 0
 	}

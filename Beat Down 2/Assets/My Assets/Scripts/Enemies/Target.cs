@@ -23,7 +23,7 @@ public class Target : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthValue = Mathf.Lerp(healthValue, Mathf.Lerp(0, 0.144f, 1 - (health / maxHealth)), 0.3f);
+        healthValue = Mathf.Lerp(healthValue, Mathf.Lerp(-0.1f, 0.144f, 1 - (health / maxHealth)), 0.3f);
         r.material.SetFloat("_Amount", healthValue);
     }
 
