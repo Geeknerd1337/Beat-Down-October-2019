@@ -2767,7 +2767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &442534594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4230,7 +4230,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 7.78, y: 0}
   m_SizeDelta: {x: 25.56, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4289,7 +4289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ec8aa4f1004364abe975bde9f869bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 1000
   partSystem: {fileID: 1246729268}
   parent: {fileID: 1149015356}
 --- !u!64 &671815641
@@ -13725,7 +13725,7 @@ MonoBehaviour:
   idleEuler: {x: 0, y: 180, z: 0}
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
-  held: 0
+  held: 1
   timeToIncreaseVolume: 0.1
   visualShot: 0
   audioCutOff: 0.5
@@ -13738,11 +13738,11 @@ MonoBehaviour:
   damage: 10
   range: 100
   spread: 0
-  projectile: 0
+  projectile: 1
   projectileVfx:
-  - {fileID: 2979017619440324742, guid: f9ca57539a14f8b4884db6c1ba07f8f0, type: 3}
-  useSequencer: 0
-  sequence: 0100000000000000
+  - {fileID: 4036541563185492203, guid: 3588ff024d1cf5742a7ffa17b0417169, type: 3}
+  useSequencer: 1
+  sequence: 0101010000010001
 --- !u!82 &1361776429
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13753,7 +13753,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 204f40f7d1d1d9b4692c420b29f1182f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 24735f02578d52f47b845aa0b26d3d3e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -17346,7 +17346,7 @@ PrefabInstance:
     - target: {fileID: 1964938012343455134, guid: d1574c9db52e23e43bef9536150251b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3254171921341085305, guid: d1574c9db52e23e43bef9536150251b9,
         type: 3}
@@ -17426,7 +17426,7 @@ PrefabInstance:
     - target: {fileID: 2927582207248232075, guid: 67bfefaef28fea94996e3f266b21f283,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6463047933594657248, guid: 67bfefaef28fea94996e3f266b21f283,
         type: 3}

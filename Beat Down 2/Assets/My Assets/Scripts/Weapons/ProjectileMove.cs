@@ -24,6 +24,7 @@ public class ProjectileMove : MonoBehaviour
             Destroy(muzzleVfx, 5f);
             muzzleVfx.transform.SetParent(creator);
             muzzleVfx.transform.localPosition = Vector3.zero;
+            //muzzleVfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
         }
     }
