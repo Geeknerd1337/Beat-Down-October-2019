@@ -9,6 +9,8 @@ public class Target : MonoBehaviour
     private float maxHealth;
     private Renderer r;
     private float healthValue;
+    public GameObject partSystem;
+    public GameObject parent;
 
 
     // Start is called before the first frame update
@@ -23,7 +25,7 @@ public class Target : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthValue = Mathf.Lerp(healthValue, Mathf.Lerp(-0.1f, 0.144f, 1 - (health / maxHealth)), 0.3f);
+        healthValue = Mathf.Lerp(healthValue, Mathf.Lerp(-0.1f, 0.18f, 1 - (health / maxHealth)), 0.3f);
         r.material.SetFloat("_Amount", healthValue);
     }
 
@@ -42,6 +44,10 @@ public class Target : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        partSystem.transform.SetParent(null);
+        partSystem.GetComponent<ParticleSystem>().Play();
+        Destroy(partSystem, 6f);
+        Destroy(parent);
+
     }
 }

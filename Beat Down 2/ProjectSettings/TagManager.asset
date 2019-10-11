@@ -16,9 +16,9 @@ TagManager:
   - PostProcessing
   - FirstPerspon
   - Player
-  - 
-  - 
-  - 
+  - Geometry
+  - Enemy
+  - EnemyProjectile
   - 
   - 
   - 

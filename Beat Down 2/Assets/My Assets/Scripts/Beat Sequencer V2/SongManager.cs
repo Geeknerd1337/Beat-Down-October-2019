@@ -116,7 +116,7 @@ public class SongManager : MonoBehaviour
 
             //calculate the position in beats
             songPosInBeats = songPosition / secPerBeat;
-            songPosInBeatsD8 = songPosInBeats / (secPerBeat / 4);
+            songPosInBeatsD8 = songPosition / (secPerBeat / 4);
 
 
             //Set beat full to false;
@@ -136,11 +136,13 @@ public class SongManager : MonoBehaviour
             if(beatCountD8 < songPosInBeatsD8)
             {
                 beatCountD8++;
-                beatFullD8 = true;
-                if(beatCountD8 > 64)
+                beatCount2++;
+                if(beatCount2 > 7)
                 {
-                    beatCountD8 = 0;
+                    beatCount2 = 0;
                 }
+                beatFullD8 = true;
+ 
             }
 
 

@@ -47,6 +47,11 @@ public class GunBase : MonoBehaviour
 
     private GameObject effectTospawn;
 
+
+    [Header("Sequencer")]
+    public bool useSequencer;
+    public bool[] sequence = new bool[8];
+
  
 
 
@@ -137,8 +142,6 @@ public class GunBase : MonoBehaviour
 
         }
 
-
-
         
         }
 
@@ -152,6 +155,7 @@ public class GunBase : MonoBehaviour
             vfx.transform.SetParent(laserPoint);
             vfx.transform.localPosition = Vector3.zero;
             vfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            vfx.GetComponent<ProjectileMove>().creator = laserPoint;
             vfx.transform.SetParent(null);
         }
     }
@@ -164,9 +168,23 @@ public class GunBase : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;
-            if (songManager.beatFull)
+            if (!useSequencer)
             {
-                Shoot();
+                if (songManager.beatFull)
+                {
+                    Shoot();
+                }
+            }
+            else
+            {
+                
+                if(songManager.beatFullD8)
+                {
+                    if (songManager.beatFullD8 && sequence[(int)songManager.beatCount2] == true)
+                    {
+                        Shoot();
+                    }
+                }
             }
 
         }else
