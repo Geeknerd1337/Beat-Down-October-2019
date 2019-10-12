@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: 2555d6d1853185c4e92862b913ae422e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Abdomen
+    100002: Abdomen_end
+    100004: Armature
+    100006: Fang_L.1
+    100008: Fang_L.2
+    100010: Fang_L.2_end
+    100012: Fang_R.1
+    100014: Fang_R.2
+    100016: Fang_R.2_end
+    100018: Leg1_L.1
+    100020: Leg1_L.2
+    100022: Leg1_L.3
+    100024: Leg1_L.4
+    100026: Leg1_L.5
+    100028: Leg1_L.5_end
+    100030: Leg1_R.1
+    100032: Leg1_R.2
+    100034: Leg1_R.3
+    100036: Leg1_R.4
+    100038: Leg1_R.5
+    100040: Leg1_R.5_end
+    100042: Leg2_L.1
+    100044: Leg2_L.2
+    100046: Leg2_L.3
+    100048: Leg2_L.4
+    100050: Leg2_L.5
+    100052: Leg2_L.5_end
+    100054: Leg2_R.1
+    100056: Leg2_R.2
+    100058: Leg2_R.3
+    100060: Leg2_R.4
+    100062: Leg2_R.5
+    100064: Leg2_R.5_end
+    100066: Leg3_L.1
+    100068: Leg3_L.2
+    100070: Leg3_L.3
+    100072: Leg3_L.4
+    100074: Leg3_L.5
+    100076: Leg3_L.5_end
+    100078: Leg3_R.1
+    100080: Leg3_R.2
+    100082: Leg3_R.3
+    100084: Leg3_R.4
+    100086: Leg3_R.5
+    100088: Leg3_R.5_end
+    100090: Leg4_L.1
+    100092: Leg4_L.2
+    100094: Leg4_L.3
+    100096: Leg4_L.4
+    100098: Leg4_L.5
+    100100: Leg4_L.5_end
+    100102: Leg4_R.1
+    100104: Leg4_R.2
+    100106: Leg4_R.3
+    100108: Leg4_R.4
+    100110: Leg4_R.5
+    100112: Leg4_R.5_end
+    100114: Spider
+    100116: //RootNode
+    100118: Thorax
+    400000: Abdomen
+    400002: Abdomen_end
+    400004: Armature
+    400006: Fang_L.1
+    400008: Fang_L.2
+    400010: Fang_L.2_end
+    400012: Fang_R.1
+    400014: Fang_R.2
+    400016: Fang_R.2_end
+    400018: Leg1_L.1
+    400020: Leg1_L.2
+    400022: Leg1_L.3
+    400024: Leg1_L.4
+    400026: Leg1_L.5
+    400028: Leg1_L.5_end
+    400030: Leg1_R.1
+    400032: Leg1_R.2
+    400034: Leg1_R.3
+    400036: Leg1_R.4
+    400038: Leg1_R.5
+    400040: Leg1_R.5_end
+    400042: Leg2_L.1
+    400044: Leg2_L.2
+    400046: Leg2_L.3
+    400048: Leg2_L.4
+    400050: Leg2_L.5
+    400052: Leg2_L.5_end
+    400054: Leg2_R.1
+    400056: Leg2_R.2
+    400058: Leg2_R.3
+    400060: Leg2_R.4
+    400062: Leg2_R.5
+    400064: Leg2_R.5_end
+    400066: Leg3_L.1
+    400068: Leg3_L.2
+    400070: Leg3_L.3
+    400072: Leg3_L.4
+    400074: Leg3_L.5
+    400076: Leg3_L.5_end
+    400078: Leg3_R.1
+    400080: Leg3_R.2
+    400082: Leg3_R.3
+    400084: Leg3_R.4
+    400086: Leg3_R.5
+    400088: Leg3_R.5_end
+    400090: Leg4_L.1
+    400092: Leg4_L.2
+    400094: Leg4_L.3
+    400096: Leg4_L.4
+    400098: Leg4_L.5
+    400100: Leg4_L.5_end
+    400102: Leg4_R.1
+    400104: Leg4_R.2
+    400106: Leg4_R.3
+    400108: Leg4_R.4
+    400110: Leg4_R.5
+    400112: Leg4_R.5_end
+    400114: Spider
+    400116: //RootNode
+    400118: Thorax
+    2100000: Gem
+    4300000: Spider
+    9500000: //RootNode
+    13700000: Spider
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
