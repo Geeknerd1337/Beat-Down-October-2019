@@ -52,7 +52,7 @@ public class LegStepper : MonoBehaviour
         Moving = false;
     }
 
-    void Update()
+    public void TryMove()
     {
         // If we are already moving, don't start another move
         if (Moving) return;
@@ -63,7 +63,7 @@ public class LegStepper : MonoBehaviour
         if (distFromHome > wantStepAtDistance)
         {
             // Start the step coroutine
-            StartCoroutine(MoveToHome());
+            StartCoroutine(Move());
         }
     }
 
@@ -96,7 +96,8 @@ public class LegStepper : MonoBehaviour
         // We want to pass through the center point
         Vector3 centerPoint = (startPoint + endPoint) / 2;
         // But also lift off, so we move it up by half the step distance (arbitrarily)
-        centerPoint += homeTransform.up * Vector3.Distance(startPoint, endPoint) / 2f;
+        centerPoint += homeTransform.transform.up * Vector3.Distance(startPoint, endPoint) / 2f;
+        
 
         float timeElapsed = 0;
         do
