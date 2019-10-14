@@ -51,6 +51,7 @@ public class Target : MonoBehaviour
         partSystem.GetComponent<ParticleSystem>().Play();
         Destroy(partSystem, 6f);
         Destroy(parent);
+        WaveManager.WaveManagerInstance.enemyCount--;
 
     }
 }

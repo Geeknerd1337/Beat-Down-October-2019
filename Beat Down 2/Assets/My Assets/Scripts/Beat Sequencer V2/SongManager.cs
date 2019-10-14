@@ -46,6 +46,7 @@ public class SongManager : MonoBehaviour
     //Number of beats currently played
     public float beatCount;
     public float beatCount2;
+    public float beatCount3;
     public float beatCountD8;
 
     //If the beat is full;
@@ -79,6 +80,10 @@ public class SongManager : MonoBehaviour
     public AudioSource a;
     public List<AudioSource> audioList;
     private float time;
+
+
+    public Player player;
+    public Color rightBeatColor;
 
     void Start()
     {
@@ -125,11 +130,29 @@ public class SongManager : MonoBehaviour
             if (beatCount < songPosInBeats)
             {
             beatFull = true;
-                beatCount++;
-                indicatorInstance = Instantiate(indicator, canvas.transform);
+            beatCount++;
+            beatCount3++;
+            indicatorInstance = Instantiate(indicator, canvas.transform);
+
             indicatorInstance.transform.position = hit.transform.position;
+            
+
+
+
+            if (beatCount3 > 7)
+            {
+                beatCount3 = 0;
+            }
+
+            
+            if (player.selectedWeapon.firePattern[(int)beatCount3])
+            {
+                indicatorInstance.GetComponent<DescreaseSize>().c = rightBeatColor;
+
 
             }
+
+        }
 
             //Set beat full D8 to be false
             beatFullD8 = false;
@@ -152,7 +175,7 @@ public class SongManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            CheckIfValidTime();
+            //CheckIfValidTime();
         }
 
 
@@ -174,12 +197,16 @@ public class SongManager : MonoBehaviour
     public bool CheckIfValidTime(){
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
-        //Debug.Log(time);
-        //Debug.Log(beatCount - 1);
-        //Debug.Log(targetBeat);
-        if(time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime)
+        Debug.Log("VVVVVVVVVV");
+        Debug.Log((int)beatCount3);
+        Debug.Log(time);
+        Debug.Log(beatCount - 1);
+        Debug.Log(targetBeat);
+        Debug.Log(Mathf.Round(time));
+        Debug.Log("^^^^^^^^^^^^");
+        if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime)
         {
-            Debug.Log("True");
+            //Debug.Log("True");
             Color TC = hit.color;
             TC.a = 1;
             hit.color = TC;
@@ -187,10 +214,37 @@ public class SongManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("False");
+            //Debug.Log("False");
             return false;
         }
 
+    }
+
+
+    public bool CheckIfValidTimeWithinFirepattern()
+    {
+        float time = songPosition / secPerBeat;
+        float targetBeat = Mathf.Round(time);
+        Debug.Log("VVVVVVVVVV");
+        Debug.Log((int)beatCount3);
+        Debug.Log(time);
+        Debug.Log(beatCount - 1);
+        Debug.Log(targetBeat);
+        Debug.Log(Mathf.Round(time));
+        Debug.Log("^^^^^^^^^^^^");
+        if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime && player.selectedWeapon.firePattern[(int)beatCount3])
+        {
+            //Debug.Log("True");
+            Color TC = hit.color;
+            TC.a = 1;
+            hit.color = TC;
+            return true;
+        }
+        else
+        {
+            //Debug.Log("False");
+            return false;
+        }
     }
     
         

@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public float regenTime;
     private float regenTimer;
     public float regenRate;
+
+    public GunBase selectedWeapon;
     // Start is called before the first frame update
     void Start()
     {

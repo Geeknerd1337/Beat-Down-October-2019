@@ -63,7 +63,9 @@ public class LegStepper : MonoBehaviour
         if (distFromHome > wantStepAtDistance)
         {
             // Start the step coroutine
-            StartCoroutine(Move());
+
+                StartCoroutine(Move());
+
         }
     }
 

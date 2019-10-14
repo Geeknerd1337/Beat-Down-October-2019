@@ -41,6 +41,7 @@ public class GunBase : MonoBehaviour
     public float range = 100f;
     public float spread = 0f;
 
+
     [Header("Projetile Information")]
     public bool projectile;
     public List<GameObject> projectileVfx = new List<GameObject>();
@@ -51,8 +52,9 @@ public class GunBase : MonoBehaviour
     [Header("Sequencer")]
     public bool useSequencer;
     public bool[] sequence = new bool[8];
+    public bool[] firePattern = new bool[8];
 
- 
+
 
 
 
@@ -157,6 +159,7 @@ public class GunBase : MonoBehaviour
             vfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
             vfx.GetComponent<ProjectileMove>().creator = laserPoint;
             vfx.transform.SetParent(null);
+            vfx.GetComponent<ProjectileMove>().damage = damage;
         }
     }
 
@@ -202,7 +205,8 @@ public class GunBase : MonoBehaviour
         timer += Time.deltaTime;
         if (Input.GetMouseButtonDown(0))
         {
-            if (songManager.CheckIfValidTime())
+            
+            if (songManager.CheckIfValidTimeWithinFirepattern())
             {
                 Shoot();
             }

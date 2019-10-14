@@ -6,6 +6,7 @@ public class ProjectileMove : MonoBehaviour
 {
     public float speed;
     public float fireRate;
+    public float damage = 10f;
 
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
@@ -17,6 +18,7 @@ public class ProjectileMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Projectile Created");
         if(muzzlePrefab != null)
         {
             GameObject muzzleVfx = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
@@ -27,6 +29,8 @@ public class ProjectileMove : MonoBehaviour
             //muzzleVfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
 
         }
+
+        Destroy(gameObject, 10f);
     }
 
     // Update is called once per frame
@@ -69,7 +73,7 @@ public class ProjectileMove : MonoBehaviour
 
                 if(collision.gameObject.GetComponent<Target>() != null)
                 {
-                    collision.gameObject.GetComponent<Target>().TakeDamage(10f);
+                    collision.gameObject.GetComponent<Target>().TakeDamage(damage);
                 }
 
                 
