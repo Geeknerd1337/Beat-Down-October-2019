@@ -15,10 +15,19 @@ public class Player : MonoBehaviour
     public float regenRate;
 
     public GunBase selectedWeapon;
+    public List<AudioSource> weaponMusic;
+
+    public List<GameObject> guns;
+    private int gunIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
         playerMaxHealth = playerHealth;
+        selectedWeapon = guns[0].GetComponent<GunBase>();
+        for(int i = 1; i < guns.Count; i++)
+        {
+            guns[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -26,6 +35,10 @@ public class Player : MonoBehaviour
     {
         healthSlider.value = playerHealth / playerMaxHealth;
         Regen();
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ChangeWeapon();
+        }
     }
 
 
@@ -33,6 +46,8 @@ public class Player : MonoBehaviour
     {
         playerHealth -= 5f;
         regenTimer = 0;
+
+
     }
 
     void Regen()
@@ -90,5 +105,23 @@ public class Player : MonoBehaviour
 
 
         }
+    }
+
+
+    void ChangeWeapon()
+    {
+        guns[gunIndex].GetComponent<GunBase>().myAudio.volume = 0;
+        guns[gunIndex].SetActive(false);
+
+        gunIndex++;
+
+        if(gunIndex >= guns.Count)
+        {
+            gunIndex = 0;
+        }
+
+        guns[gunIndex].SetActive(true);
+        selectedWeapon = guns[gunIndex].GetComponent<GunBase>();
+        
     }
 }

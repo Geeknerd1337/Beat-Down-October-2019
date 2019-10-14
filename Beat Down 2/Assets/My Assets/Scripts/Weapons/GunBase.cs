@@ -20,7 +20,7 @@ public class GunBase : MonoBehaviour
     public bool held;
     SongManager songManager;
     //The track that this gun is using
-    private AudioSource myAudio;
+    public AudioSource myAudio;
     public float timeToIncreaseVolume;
     private float timer;
 
@@ -64,13 +64,16 @@ public class GunBase : MonoBehaviour
         //Get the instance of the song manager
         songManager = SongManager.ManagerInstance;
         //Get the audio source on this weapon
-        myAudio = GetComponent<AudioSource>();
+        if (GetComponent<AudioSource>() != null)
+        {
+            myAudio = GetComponent<AudioSource>();
+        }
         //Add it to song managers audioList
         songManager.audioList.Add(myAudio);
         //Set my volume down to zero
         myAudio.volume = 0;
         //Get the peer from my audioSource;
-        peer = GetComponent<AudioPeer>();
+        peer = myAudio.gameObject.GetComponent<AudioPeer>();
 
         effectTospawn = projectileVfx[0];
     }
