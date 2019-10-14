@@ -7,7 +7,7 @@ public class Target : MonoBehaviour
 
     public float health = 50f;
     private float maxHealth;
-    private Renderer r;
+    public Renderer r;
     private float healthValue;
     public GameObject partSystem;
     public GameObject parent;
@@ -16,7 +16,10 @@ public class Target : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        r = GetComponent<Renderer>();
+        if (GetComponent<Renderer>() != null)
+        {
+            r = GetComponent<Renderer>();
+        }
         r.material = new Material(r.material);
         maxHealth = health;
         healthValue = 0;
