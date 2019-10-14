@@ -94,9 +94,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BottomColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0, g: 0.112430096, b: 1, a: 1}
+    - _Color: {r: 0, g: 0.220819, b: 1, a: 1}
     - _DissolveColor: {r: 1, g: 0.79, b: 0.909, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0.51957995, g: 0.7924528, b: 0.7775689, a: 1}
+    - _RimColor: {r: 0, g: 1, b: 0.9337411, a: 1}
     - _SColor: {r: 1, g: 1, b: 1, a: 1}
     - _TColor: {r: 1, g: 1, b: 1, a: 1}
