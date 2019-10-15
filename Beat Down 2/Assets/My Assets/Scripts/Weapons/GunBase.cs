@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GunBase : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class GunBase : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
     public float spread = 0f;
+    public int ammoType;
 
 
     [Header("Projetile Information")]
@@ -54,6 +56,10 @@ public class GunBase : MonoBehaviour
     public bool[] sequence = new bool[8];
     public bool[] firePattern = new bool[8];
 
+
+    [Header("Misc")]
+    private Player player;
+    public TextMeshProUGUI ammoText;
 
 
 
@@ -76,6 +82,8 @@ public class GunBase : MonoBehaviour
         peer = myAudio.gameObject.GetComponent<AudioPeer>();
 
         effectTospawn = projectileVfx[0];
+
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
@@ -95,6 +103,12 @@ public class GunBase : MonoBehaviour
         {
             TappedShot();
         }
+
+
+        if(ammoText != null)
+        {
+            UpdateText();
+        }
     }
 
 
@@ -106,42 +120,48 @@ public class GunBase : MonoBehaviour
 
     void Shoot()
     {
-        RaycastHit hit;
-        Vector3 dir = Camera.main.transform.forward;
-        dir.x += Random.Range(-spread, spread);
-        dir.y += Random.Range(-spread, spread);
-        dir.z += Random.Range(-spread, spread);
 
-
-        GameObject g;
-        g = null;
-
-        if (projectile)
+        if (player.ammoTypes[ammoType] > 0)
         {
-            SpawnVFX();
+            player.ammoTypes[ammoType]--;
+            RaycastHit hit;
+            Vector3 dir = Camera.main.transform.forward;
+            dir.x += Random.Range(-spread, spread);
+            dir.y += Random.Range(-spread, spread);
+            dir.z += Random.Range(-spread, spread);
 
-        }
-        else
-        {
-            g = Instantiate(LaserPrefab);
-            g.transform.position = laserPoint.position;
-            g.transform.rotation = laserPoint.rotation;
-            g.transform.SetParent(Camera.main.transform);
-        }
 
-        transform.localRotation = Quaternion.Euler(shotEuler.x, shotEuler.y, shotEuler.z);
-        transform.localPosition = idlePosition + shotPosition;
+            GameObject g;
+            g = null;
 
-        if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask) && !projectile)
-        {
-            Target target = hit.transform.GetComponent<Target>();
-           
-            
-
-            if (target != null)
+            if (projectile)
             {
-                g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, Vector3.Distance(Camera.main.transform.position, hit.point)));
-                target.TakeDamage(damage);
+                SpawnVFX();
+
+            }
+            else
+            {
+                g = Instantiate(LaserPrefab);
+                g.transform.position = laserPoint.position;
+                g.transform.rotation = laserPoint.rotation;
+                g.transform.SetParent(Camera.main.transform);
+            }
+
+            transform.localRotation = Quaternion.Euler(shotEuler.x, shotEuler.y, shotEuler.z);
+            transform.localPosition = idlePosition + shotPosition;
+
+            if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask) && !projectile)
+            {
+                Target target = hit.transform.GetComponent<Target>();
+
+
+
+                if (target != null)
+                {
+                    g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, Vector3.Distance(Camera.main.transform.position, hit.point)));
+                    target.TakeDamage(damage);
+
+                }
 
             }
 
@@ -244,5 +264,10 @@ public class GunBase : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
+    }
+
+    void UpdateText()
+    {
+        ammoText.text = player.ammoTypes[ammoType].ToString();
     }
 }

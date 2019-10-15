@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
 
     public List<GameObject> guns;
     private int gunIndex = 0;
+
+    public List<int> ammoTypes;
+
     // Start is called before the first frame update
     void Start()
     {
