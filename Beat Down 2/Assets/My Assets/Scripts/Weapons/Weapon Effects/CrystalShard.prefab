@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2582253359224432037}
   - component: {fileID: 2974035573467635748}
   - component: {fileID: 4765327785333145907}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: 2979017619440324743}
   - component: {fileID: 7708230437348827041}
   - component: {fileID: 568506544508284155}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CrystalShard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4806,11 +4806,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 60
   fireRate: 4
+  damage: 10
   muzzlePrefab: {fileID: 2927582207248232075, guid: 67bfefaef28fea94996e3f266b21f283,
     type: 3}
   hitPrefab: {fileID: 1608462271211279001, guid: 2fd564e6c97088d44a5b4b849871c560,
     type: 3}
   creator: {fileID: 0}
+  hurtPlayer: 0
   stop: 1
 --- !u!65 &7708230437348827041
 BoxCollider:
@@ -4852,7 +4854,7 @@ GameObject:
   - component: {fileID: 4947788429996103696}
   - component: {fileID: 7946689550070377859}
   - component: {fileID: 5252382044950188208}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9549,7 +9551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3432440802916313895}
   - component: {fileID: 6030086140432813226}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

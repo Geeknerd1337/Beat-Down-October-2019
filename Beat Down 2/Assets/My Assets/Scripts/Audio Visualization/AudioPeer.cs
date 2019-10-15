@@ -141,4 +141,25 @@ public class AudioPeer : MonoBehaviour
         }
         return b;
     }
+
+    public bool CheckBandAverage(float cutoff)
+    {
+        float avg = 0;
+        for (int i = 0; i < 8; i++)
+        {
+            avg += _audioBand[i];
+        }
+
+        avg /= 8;
+
+        if(avg > cutoff)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
 }

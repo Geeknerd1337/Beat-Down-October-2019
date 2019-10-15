@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3640373221078468040}
   - component: {fileID: 4041646479821127753}
   - component: {fileID: 6013129899962753374}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: 4036541563185492202}
   - component: {fileID: 8910960280412651468}
   - component: {fileID: 1634956366583762070}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SoundWaveProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4806,11 +4806,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 35
   fireRate: 4
+  damage: 10
   muzzlePrefab: {fileID: 1964938012343455134, guid: d1574c9db52e23e43bef9536150251b9,
     type: 3}
   hitPrefab: {fileID: 1608462271211279001, guid: 2fd564e6c97088d44a5b4b849871c560,
     type: 3}
   creator: {fileID: 0}
+  hurtPlayer: 0
   stop: 0
 --- !u!65 &8910960280412651468
 BoxCollider:
@@ -4852,7 +4854,7 @@ GameObject:
   - component: {fileID: 6195025417107093629}
   - component: {fileID: 9159025993730182638}
   - component: {fileID: 6464636012336181469}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9607,7 +9609,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4535493362802330442}
   - component: {fileID: 4826766929074760903}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

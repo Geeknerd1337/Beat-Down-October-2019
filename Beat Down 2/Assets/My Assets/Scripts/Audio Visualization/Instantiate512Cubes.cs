@@ -61,7 +61,7 @@ public class Instantiate512Cubes : MonoBehaviour
             if (_bandCube != null)
             {
                 //_bandCube[i].transform.localScale = new Vector3(1, 1, ((peer._samples[i] + peer2._samples[i]) * _maxScale) + 2);
-                _bandCube[i].transform.localScale = new Vector3(1, 1, ((peer._freqBand[i]) * 4) + 2);
+                _bandCube[i].transform.localScale = new Vector3(1, 1, ((peer._audioBand[i]) * 4) + 2);
             }
         }
     }

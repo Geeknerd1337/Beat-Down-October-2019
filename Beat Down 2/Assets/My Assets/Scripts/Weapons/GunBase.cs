@@ -28,8 +28,10 @@ public class GunBase : MonoBehaviour
     [Header("Guns that use Visualization")]
     public bool visualShot;
     private AudioPeer peer;
-    public float audioCutOff;
+    public Vector2 audioCutOff;
     private bool canShoot = true;
+    public float timeBetweenShots;
+    private float shotTimer;
 
 
     [Header("Gun Visual Efffects")]
@@ -41,6 +43,7 @@ public class GunBase : MonoBehaviour
     public float damage = 10f;
     public float range = 100f;
     public float spread = 0f;
+    public int numShots = 1;
     public int ammoType;
 
 
@@ -53,13 +56,24 @@ public class GunBase : MonoBehaviour
 
     [Header("Sequencer")]
     public bool useSequencer;
-    public bool[] sequence = new bool[8];
+    public bool useSequencer2;
+    public bool[] sequence = new bool[64];
+    public bool[] sequence2 = new bool[16];
     public bool[] firePattern = new bool[8];
 
 
     [Header("Misc")]
     private Player player;
     public TextMeshProUGUI ammoText;
+
+
+    [Header("Guns that require to be charged for a bar")]
+    public AudioSource chargeSound;
+    public bool chargeShot;
+    [SerializeField]
+    private bool charging;
+    private int barsSinceLast;
+
 
 
 
@@ -76,6 +90,11 @@ public class GunBase : MonoBehaviour
         }
         //Add it to song managers audioList
         songManager.audioList.Add(myAudio);
+        if (chargeSound != null)
+        {
+            songManager.audioList.Add(chargeSound);
+            chargeSound.volume = 0;
+        }
         //Set my volume down to zero
         myAudio.volume = 0;
         //Get the peer from my audioSource;
@@ -121,57 +140,62 @@ public class GunBase : MonoBehaviour
     void Shoot()
     {
 
-        if (player.ammoTypes[ammoType] > 0)
-        {
-            player.ammoTypes[ammoType]--;
-            RaycastHit hit;
-            Vector3 dir = Camera.main.transform.forward;
-            dir.x += Random.Range(-spread, spread);
-            dir.y += Random.Range(-spread, spread);
-            dir.z += Random.Range(-spread, spread);
-
-
-            GameObject g;
-            g = null;
-
-            if (projectile)
+            if (player.ammoTypes[ammoType] > 0)
             {
-                SpawnVFX();
+            for (int i = 0; i < numShots; i++)
 
-            }
-            else
             {
-                g = Instantiate(LaserPrefab);
-                g.transform.position = laserPoint.position;
-                g.transform.rotation = laserPoint.rotation;
-                g.transform.SetParent(Camera.main.transform);
-            }
-
-            transform.localRotation = Quaternion.Euler(shotEuler.x, shotEuler.y, shotEuler.z);
-            transform.localPosition = idlePosition + shotPosition;
-
-            if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask) && !projectile)
-            {
-                Target target = hit.transform.GetComponent<Target>();
+                player.ammoTypes[ammoType]--;
+                RaycastHit hit;
+                Vector3 dir = Camera.main.transform.forward;
+                dir.x += Random.Range(-spread, spread);
+                dir.y += Random.Range(-spread, spread);
+                dir.z += Random.Range(-spread, spread);
 
 
+                GameObject g;
+                g = null;
 
-                if (target != null)
+                if (projectile)
                 {
-                    g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, Vector3.Distance(Camera.main.transform.position, hit.point)));
-                    target.TakeDamage(damage);
+                    SpawnVFX(dir);
+
+                }
+                else
+                {
+                    g = Instantiate(LaserPrefab);
+                    g.transform.position = laserPoint.position;
+                    g.transform.rotation = laserPoint.rotation;
+                    g.transform.SetParent(Camera.main.transform);
+                }
+
+
+
+                if (Physics.Raycast(Camera.main.transform.position, dir, out hit, range, layermask) && !projectile)
+                {
+                    Target target = hit.transform.GetComponent<Target>();
+
+
+
+                    if (target != null)
+                    {
+                        g.GetComponent<LineRenderer>().SetPosition(1, new Vector3(0, 0, Vector3.Distance(Camera.main.transform.position, hit.point)));
+                        target.TakeDamage(damage);
+
+                    }
 
                 }
 
             }
-
+            transform.localRotation = Quaternion.Euler(shotEuler.x, shotEuler.y, shotEuler.z);
+            transform.localPosition = idlePosition + shotPosition;
         }
 
         
         }
 
 
-    void SpawnVFX()
+    void SpawnVFX(Vector3 dir)
     {
         GameObject vfx;
         if(laserPoint != null)
@@ -179,7 +203,7 @@ public class GunBase : MonoBehaviour
             vfx = Instantiate(effectTospawn);
             vfx.transform.SetParent(laserPoint);
             vfx.transform.localPosition = Vector3.zero;
-            vfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            vfx.transform.localRotation = Quaternion.Euler(dir);
             vfx.GetComponent<ProjectileMove>().creator = laserPoint;
             vfx.transform.SetParent(null);
             vfx.GetComponent<ProjectileMove>().damage = damage;
@@ -204,13 +228,23 @@ public class GunBase : MonoBehaviour
             else
             {
                 
-                if(songManager.beatFullD8)
+                if(songManager.beatFullD8 && !useSequencer2)
                 {
                     if (songManager.beatFullD8 && sequence[(int)songManager.beatCount2] == true)
                     {
                         Shoot();
                     }
                 }
+
+                if(useSequencer2 && songManager.beatFullD16)
+                {
+                    if (sequence2[(int)songManager.beatCount4] == true)
+                    {
+                        Shoot();
+                    }
+                }
+
+
             }
 
         }else
@@ -224,14 +258,62 @@ public class GunBase : MonoBehaviour
 
     void TappedShot()
     {
-        //This event is going to be used for if a shot has to be tapped to the beat, the track will always play in these instances
-        timer += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0))
+        //This event is going to be used for if a shot has to be tapped to the beat, the track will always play in these instances, but only if this isn't a charged weapon
+        if (!chargeShot)
         {
-            
-            if (songManager.CheckIfValidTimeWithinFirepattern())
+            timer += Time.deltaTime;
+            if (Input.GetMouseButtonDown(0))
             {
-                Shoot();
+
+                if (songManager.CheckIfValidTimeWithinFirepattern())
+                {
+                    Shoot();
+                }
+            }
+            Debug.Log("yellow");
+        }
+        else
+        {
+            if (!charging)
+            {
+                timer = 1;
+                chargeSound.volume = 1;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (songManager.CheckIfValidTimeWithinFirepattern())
+                    {
+                        barsSinceLast = 0;
+                        charging = true;
+                        chargeSound.PlayScheduled(songManager.GetTimeToNextBeat());
+                    }
+                }
+
+            }
+            else
+            {
+                if (songManager.beatFull)
+                {
+                    barsSinceLast++;
+                }
+
+                if(barsSinceLast > 1)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (songManager.CheckIfValidTimeWithinFirepattern() & chargeSound.isPlaying)
+                        {
+                            Shoot();
+                            charging = false;
+                            chargeSound.volume = 0;
+                            myAudio.Play();
+                        }
+
+                        if(chargeSound.isPlaying == false)
+                        {
+                            charging = false;
+                        }
+                    }
+                    }
             }
         }
     }
@@ -249,15 +331,25 @@ public class GunBase : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;
-            if (peer.CheckAllBands(audioCutOff) && canShoot)
+            if (peer.CheckAllBands(audioCutOff.x) && canShoot)
             {
                 Shoot();
                 canShoot = false;
+                shotTimer = 0;
             }
-            else
+
+            if (!canShoot)
+            {
+                shotTimer += Time.deltaTime;
+            }
+
+            if (!canShoot && shotTimer > timeBetweenShots & !peer.CheckAllBands(audioCutOff.x))
             {
                 canShoot = true;
+                
             }
+
+
 
         }
         else

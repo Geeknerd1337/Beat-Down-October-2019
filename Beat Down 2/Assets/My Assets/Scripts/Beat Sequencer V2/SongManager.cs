@@ -34,6 +34,9 @@ public class SongManager : MonoBehaviour
     //Song position in 1/8th beats
     private float songPosInBeatsD8;
 
+    //Song position in 1/16th beats
+    private float songPosInBeatsD16;
+
     //Length of the beats
     private float secPerBeat;
 
@@ -48,10 +51,13 @@ public class SongManager : MonoBehaviour
     public float beatCount2;
     public float beatCount3;
     public float beatCountD8;
+    public float beatCountD16;
+    public float beatCount4;
 
     //If the beat is full;
     public bool beatFull = false;
     public bool beatFullD8 = false;
+    public bool beatFullD16 = false;
 
 
     //Currently I want to keep track of the beats and measure if the player is tapping with the beat
@@ -100,7 +106,8 @@ public class SongManager : MonoBehaviour
         {
             audio.Play();
         }
-
+        beatCount2 = 0;
+         
 
 
 
@@ -122,6 +129,7 @@ public class SongManager : MonoBehaviour
             //calculate the position in beats
             songPosInBeats = songPosition / secPerBeat;
             songPosInBeatsD8 = songPosition / (secPerBeat / 4);
+            songPosInBeatsD16 = songPosition / (secPerBeat / 8);
 
 
             //Set beat full to false;
@@ -160,12 +168,25 @@ public class SongManager : MonoBehaviour
             {
                 beatCountD8++;
                 beatCount2++;
-                if(beatCount2 > 7)
+                if(beatCount2 > 63)
                 {
                     beatCount2 = 0;
                 }
                 beatFullD8 = true;
  
+            }
+
+            beatFullD16 = false;
+
+           if(beatCountD16 < songPosInBeatsD16)
+            {
+                beatCountD16++;
+                beatCount4++;
+                if(beatCount4 > 15)
+                {
+                    beatCount4 = 0;
+                }
+                beatFullD16 = true;
             }
 
 
@@ -197,6 +218,7 @@ public class SongManager : MonoBehaviour
     public bool CheckIfValidTime(){
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
+        /*
         Debug.Log("VVVVVVVVVV");
         Debug.Log((int)beatCount3);
         Debug.Log(time);
@@ -204,6 +226,7 @@ public class SongManager : MonoBehaviour
         Debug.Log(targetBeat);
         Debug.Log(Mathf.Round(time));
         Debug.Log("^^^^^^^^^^^^");
+        */
         if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime)
         {
             //Debug.Log("True");
@@ -225,6 +248,7 @@ public class SongManager : MonoBehaviour
     {
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
+        /*
         Debug.Log("VVVVVVVVVV");
         Debug.Log((int)beatCount3);
         Debug.Log(time);
@@ -232,6 +256,7 @@ public class SongManager : MonoBehaviour
         Debug.Log(targetBeat);
         Debug.Log(Mathf.Round(time));
         Debug.Log("^^^^^^^^^^^^");
+        */
         if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime && player.selectedWeapon.firePattern[(int)beatCount3])
         {
             //Debug.Log("True");
@@ -245,6 +270,15 @@ public class SongManager : MonoBehaviour
             //Debug.Log("False");
             return false;
         }
+    }
+
+
+    public float GetTimeToNextBeat()
+    {
+        float time = songPosition / secPerBeat;
+        float targetBeat = Mathf.Round(time);
+
+        return Mathf.Abs(time - targetBeat);
     }
     
         
