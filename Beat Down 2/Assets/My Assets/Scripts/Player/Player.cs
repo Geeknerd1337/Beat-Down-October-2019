@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public List<int> ammoTypes;
 
+    public int money;
+
     // Start is called before the first frame update
     void Start()
     {

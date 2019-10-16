@@ -60,6 +60,7 @@ public class GunBase : MonoBehaviour
     public bool[] sequence = new bool[64];
     public bool[] sequence2 = new bool[16];
     public bool[] firePattern = new bool[8];
+    public bool[] chargePattern = new bool[8];
 
 
     [Header("Misc")]
@@ -72,7 +73,9 @@ public class GunBase : MonoBehaviour
     public bool chargeShot;
     [SerializeField]
     private bool charging;
-    private int barsSinceLast;
+    private bool canReset;
+    private bool chargeFire;
+
 
 
 
@@ -276,44 +279,59 @@ public class GunBase : MonoBehaviour
         {
             if (!charging)
             {
-                timer = 1;
-                chargeSound.volume = 1;
+                timer = 0;
                 if (Input.GetMouseButtonDown(0))
                 {
                     if (songManager.CheckIfValidTimeWithinFirepattern())
                     {
-                        barsSinceLast = 0;
                         charging = true;
-                        chargeSound.PlayScheduled(songManager.GetTimeToNextBeat());
+                        timer = 0;
+                        chargeSound.volume = 1;
+                        canReset = false;
+                        chargeFire = false;
                     }
                 }
-
             }
             else
             {
-                if (songManager.beatFull)
+                if (!chargeFire)
                 {
-                    barsSinceLast++;
-                }
+                    if (songManager.beatCount3 == 1 && canReset)
+                    {
+                        charging = false;
+                        chargeSound.volume = 0;
+                    }
 
-                if(barsSinceLast > 1)
-                {
+                    if (songManager.beatCount3 == 2)
+                    {
+                        canReset = true;
+                    }
+
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if (songManager.CheckIfValidTimeWithinFirepattern() & chargeSound.isPlaying)
+                        if (songManager.CheckIfValidTimeWithinChargepattern() && canReset)
                         {
-                            Shoot();
-                            charging = false;
+                            chargeFire = true;
+                            timer = 1;
                             chargeSound.volume = 0;
-                            myAudio.Play();
+                            Shoot();
+                            canReset = false;
                         }
+                    }
+                }
+                else
+                {
+                    if (songManager.beatCount3 == 2)
+                    {
+                        canReset = true;
+                    }
 
-                        if(chargeSound.isPlaying == false)
-                        {
-                            charging = false;
-                        }
+                    if (songManager.beatCount3 == 0 && canReset)
+                    {
+                        charging = false;
+                        chargeSound.volume = 0;
                     }
-                    }
+                }
             }
         }
     }

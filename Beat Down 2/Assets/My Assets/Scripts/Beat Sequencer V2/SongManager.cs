@@ -272,6 +272,34 @@ public class SongManager : MonoBehaviour
         }
     }
 
+    public bool CheckIfValidTimeWithinChargepattern()
+    {
+        float time = songPosition / secPerBeat;
+        float targetBeat = Mathf.Round(time);
+        /*
+        Debug.Log("VVVVVVVVVV");
+        Debug.Log((int)beatCount3);
+        Debug.Log(time);
+        Debug.Log(beatCount - 1);
+        Debug.Log(targetBeat);
+        Debug.Log(Mathf.Round(time));
+        Debug.Log("^^^^^^^^^^^^");
+        */
+        if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime && player.selectedWeapon.chargePattern[(int)beatCount3])
+        {
+            //Debug.Log("True");
+            Color TC = hit.color;
+            TC.a = 1;
+            hit.color = TC;
+            return true;
+        }
+        else
+        {
+            //Debug.Log("False");
+            return false;
+        }
+    }
+
 
     public float GetTimeToNextBeat()
     {
