@@ -33,6 +33,12 @@ public class Player : MonoBehaviour
         {
             guns[i].SetActive(false);
         }
+
+        int b = guns.Count;
+        for (int i = 1; i < b; i++)
+        {
+            guns.RemoveAt(1);
+        }
     }
 
     // Update is called once per frame
