@@ -143,7 +143,9 @@ public class SongManager : MonoBehaviour
             indicatorInstance = Instantiate(indicator, canvas.transform);
 
             indicatorInstance.transform.position = hit.transform.position;
-            
+            int index = indicatorInstance.transform.GetSiblingIndex();
+            indicatorInstance.transform.SetSiblingIndex(index - 3);
+
 
 
 
