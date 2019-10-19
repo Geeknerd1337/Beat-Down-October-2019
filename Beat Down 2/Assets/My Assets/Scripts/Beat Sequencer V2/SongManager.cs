@@ -308,6 +308,16 @@ public class SongManager : MonoBehaviour
 
         return Mathf.Abs(time - targetBeat);
     }
+
+    public float GetSP()
+    {
+        return songPosition;
+    }
+
+    public float GetSecPerBeat()
+    {
+        return secPerBeat;
+    }
     
         
     
