@@ -273,7 +273,7 @@ public class GunBase : MonoBehaviour
                     Shoot();
                 }
             }
-            Debug.Log("yellow");
+           // Debug.Log("yellow");
         }
         else
         {

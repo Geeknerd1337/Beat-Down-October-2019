@@ -36,11 +36,14 @@ public class Target : MonoBehaviour
 
     public void TakeDamage(float amt)
     {
-        health -= amt;
-
-        if (health <= 0f)
+        if (health > 0)
         {
-            Die();
+            health -= amt;
+
+            if (health <= 0f)
+            {
+                Die();
+            }
         }
     }
 

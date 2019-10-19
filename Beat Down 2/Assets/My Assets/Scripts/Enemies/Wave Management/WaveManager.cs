@@ -65,7 +65,7 @@ public class WaveManager : MonoBehaviour
 
         if(waveTimer == 0 && enemyCount > 0)
         {
-            if ((SongManager.ManagerInstance.beatCount3 == 0) && breakDown[0].volume == 1 && SongManager.ManagerInstance.beatFull)
+            if ((SongManager.ManagerInstance.beatCount3 == 1) && breakDown[0].volume == 1 && SongManager.ManagerInstance.beatFull)
             {
                 foreach (AudioSource a in breakDown)
                 {
@@ -81,7 +81,7 @@ public class WaveManager : MonoBehaviour
         if(canWait && enemyCount == 0)
         {
             waveTimer += Time.deltaTime;
-            if ((SongManager.ManagerInstance.beatCount3 == 0) && breakDown[0].volume == 0 && SongManager.ManagerInstance.beatFull)
+            if ((SongManager.ManagerInstance.beatCount3 == 1) && breakDown[0].volume == 0 && SongManager.ManagerInstance.beatFull)
             {
                 foreach (AudioSource a in breakDown)
                 {

@@ -15,10 +15,12 @@ public class ProjectileMove : MonoBehaviour
     public bool hurtPlayer;
 
     public bool stop;
+    public bool piercing;
+    public float life;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Projectile Created");
+       // Debug.Log("Projectile Created");
         if(muzzlePrefab != null)
         {
             GameObject muzzleVfx = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
@@ -52,17 +54,47 @@ public class ProjectileMove : MonoBehaviour
 
             if (collision.transform != null)
             {
-                if (stop)
+                if (!piercing)
                 {
-                    speed = 0;
-                    Destroy(gameObject, 4f);
-                    gameObject.transform.SetParent(collision.transform);
-                    Destroy(GetComponent<Rigidbody>());
-                    Destroy(GetComponent<Collider>());
+                    if (stop)
+                    {
+                        speed = 0;
+                        Destroy(gameObject, 4f);
+                        gameObject.transform.SetParent(collision.transform);
+                        Destroy(GetComponent<Rigidbody>());
+                        Destroy(GetComponent<Collider>());
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
                 else
                 {
-                    Destroy(gameObject);
+                    life -= Time.deltaTime;
+                    if (life < 0)
+                    {
+                        Destroy(gameObject);
+                    }
+                        if (collision.gameObject.layer == 12)
+                    {
+
+                    }
+                    else
+                    {
+                        if (stop)
+                        {
+                            speed = 0;
+                            Destroy(gameObject, 4f);
+                            gameObject.transform.SetParent(collision.transform);
+                            Destroy(GetComponent<Rigidbody>());
+                            Destroy(GetComponent<Collider>());
+                        }
+                        else
+                        {
+                            Destroy(gameObject);
+                        }
+                    }
                 }
 
                 if(hitPrefab != null)
@@ -107,5 +139,89 @@ public class ProjectileMove : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag != "player" && !hurtPlayer && collision.gameObject.layer != 9 && collision.gameObject.layer != 8)
+        {
+            RaycastHit hit;
+            Quaternion rot = Quaternion.Euler(Vector3.zero);
+            Vector3 pos = transform.position;
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            {
+                 rot = Quaternion.FromToRotation(Vector3.up, hit.normal);
+                 pos = hit.point;
+            }
+
+
+            if (collision.transform != null)
+            {
+                if (!piercing)
+                {
+                    if (stop)
+                    {
+                        speed = 0;
+                        Destroy(gameObject, 4f);
+                        gameObject.transform.SetParent(collision.transform);
+                        Destroy(GetComponent<Rigidbody>());
+                        Destroy(GetComponent<Collider>());
+                        Debug.Log(collision.name);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+                else
+                {
+                    life -= Time.deltaTime;
+                    if (life < 0)
+                    {
+                        Destroy(gameObject);
+                    }
+                    if (collision.gameObject.layer == 12)
+                    {
+
+                    }
+                    else
+                    {
+                        if (stop)
+                        {
+                            speed = 0;
+                            Destroy(gameObject, 4f);
+                            gameObject.transform.SetParent(collision.transform);
+                            Destroy(GetComponent<Rigidbody>());
+                            Destroy(GetComponent<Collider>());
+                            Debug.Log(collision.gameObject.layer);
+                        }
+                        else
+                        {
+                            Destroy(gameObject);
+                        }
+                    }
+                }
+
+                if (hitPrefab != null)
+                {
+                    GameObject hitVFX = Instantiate(hitPrefab, pos, rot);
+                    Destroy(hitVFX, 3f);
+                }
+
+                if (collision.gameObject.GetComponent<Target>() != null)
+                {
+                    collision.gameObject.GetComponent<Target>().TakeDamage(damage);
+                }
+
+
+
+
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+       
     }
 }
