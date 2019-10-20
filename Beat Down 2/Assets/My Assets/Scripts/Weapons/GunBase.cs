@@ -92,7 +92,7 @@ public class GunBase : MonoBehaviour
             myAudio = GetComponent<AudioSource>();
         }
         //Add it to song managers audioList
-        songManager.audioList.Add(myAudio);
+        //songManager.audioList.Add(myAudio);
         if (chargeSound != null)
         {
             songManager.audioList.Add(chargeSound);

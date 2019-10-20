@@ -29,8 +29,12 @@ public class Player : MonoBehaviour
     {
         playerMaxHealth = playerHealth;
         selectedWeapon = guns[0].GetComponent<GunBase>();
-        for(int i = 1; i < guns.Count; i++)
+        SongManager.ManagerInstance.audioList.Add(guns[0].GetComponent<GunBase>().myAudio);
+        guns[0].GetComponent<GunBase>().myAudio.volume = 0;
+        for (int i = 1; i < guns.Count; i++)
         {
+            SongManager.ManagerInstance.audioList.Add(guns[i].GetComponent<GunBase>().myAudio);
+            guns[i].GetComponent<GunBase>().myAudio.volume = 0;
             guns[i].SetActive(false);
         }
 
