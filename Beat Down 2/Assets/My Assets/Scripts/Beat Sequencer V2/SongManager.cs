@@ -266,16 +266,32 @@ public class SongManager : MonoBehaviour
     {
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
-        /*
+        bool b = false;
+        
         Debug.Log("VVVVVVVVVV");
-        Debug.Log((int)beatCount3);
         Debug.Log(time);
-        Debug.Log(beatCount - 1);
         Debug.Log(targetBeat);
         Debug.Log(Mathf.Round(time));
+        Debug.Log(player.selectedWeapon.firePattern[(int)beatCount3]);
         Debug.Log("^^^^^^^^^^^^");
-        */
-        if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime && player.selectedWeapon.firePattern[(int)beatCount3])
+
+        /*if(time > targetBeat)
+        {
+            if (beatCount3 == 0 && player.selectedWeapon.firePattern[7])
+            {
+                b = true;
+            }
+
+
+            if (beatCount3 != 0) {
+                if (player.selectedWeapon.firePattern[(int)beatCount3 - 1])
+                {
+                    b = true;
+                }
+                    }
+        }*/
+        
+        if (time >= (targetBeat) - judgmentTime && time <= (targetBeat) + judgmentTime && (player.selectedWeapon.firePattern[(int)beatCount3] || b))
         {
             //Debug.Log("True");
             Color TC = hit.color;
