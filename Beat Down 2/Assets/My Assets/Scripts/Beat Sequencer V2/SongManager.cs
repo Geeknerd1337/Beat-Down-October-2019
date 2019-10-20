@@ -91,22 +91,16 @@ public class SongManager : MonoBehaviour
     public Player player;
     public Color rightBeatColor;
 
+
+    public float startDelay;
+    private bool started;
     void Start()
     {
 
         //Calculate the number of seconds in a beat
         secPerBeat = 60f / BPM;
 
-        //record the time when the song starts
-        dspTimeSong = (float)AudioSettings.dspTime;
 
-        //start the song
-        a.Play();
-        foreach(AudioSource audio in audioList)
-        {
-            audio.Play();
-        }
-        beatCount2 = 0;
          
 
 
@@ -118,7 +112,29 @@ public class SongManager : MonoBehaviour
 
     void Update()
     {
-        time += Time.deltaTime;
+        if (startDelay > 0)
+        {
+            startDelay -= Time.deltaTime;
+        }
+
+        if (startDelay <= 0)
+        {
+            if (!started)
+            {
+                //record the time when the song starts
+                dspTimeSong = (float)AudioSettings.dspTime;
+
+                //start the song
+                a.Play();
+                foreach (AudioSource audio in audioList)
+                {
+                    audio.Play();
+                }
+                beatCount2 = 0;
+                started = true;
+            }
+
+            time += Time.deltaTime;
 
 
             //calculate the position in seconds
@@ -137,54 +153,54 @@ public class SongManager : MonoBehaviour
             //Uptick the beats when necessary
             if (beatCount < songPosInBeats)
             {
-            beatFull = true;
-            beatCount++;
-            beatCount3++;
-            indicatorInstance = Instantiate(indicator, canvas.transform);
+                beatFull = true;
+                beatCount++;
+                beatCount3++;
+                indicatorInstance = Instantiate(indicator, canvas.transform);
 
-            indicatorInstance.transform.position = hit.transform.position;
-            int index = indicatorInstance.transform.GetSiblingIndex();
-            indicatorInstance.transform.SetSiblingIndex(index - 3);
-
-
+                indicatorInstance.transform.position = hit.transform.position;
+                int index = indicatorInstance.transform.GetSiblingIndex();
+                indicatorInstance.transform.SetSiblingIndex(index - 3);
 
 
-            if (beatCount3 > 7)
-            {
-                beatCount3 = 0;
+
+
+                if (beatCount3 > 7)
+                {
+                    beatCount3 = 0;
+                }
+
+
+                if (player.selectedWeapon.firePattern[(int)beatCount3])
+                {
+                    indicatorInstance.GetComponent<DescreaseSize>().c = rightBeatColor;
+
+
+                }
+
             }
-
-            
-            if (player.selectedWeapon.firePattern[(int)beatCount3])
-            {
-                indicatorInstance.GetComponent<DescreaseSize>().c = rightBeatColor;
-
-
-            }
-
-        }
 
             //Set beat full D8 to be false
             beatFullD8 = false;
-            if(beatCountD8 < songPosInBeatsD8)
+            if (beatCountD8 < songPosInBeatsD8)
             {
                 beatCountD8++;
                 beatCount2++;
-                if(beatCount2 > 63)
+                if (beatCount2 > 63)
                 {
                     beatCount2 = 0;
                 }
                 beatFullD8 = true;
- 
+
             }
 
             beatFullD16 = false;
 
-           if(beatCountD16 < songPosInBeatsD16)
+            if (beatCountD16 < songPosInBeatsD16)
             {
                 beatCountD16++;
                 beatCount4++;
-                if(beatCount4 > 15)
+                if (beatCount4 > 15)
                 {
                     beatCount4 = 0;
                 }
@@ -196,11 +212,11 @@ public class SongManager : MonoBehaviour
             UpdateHitColor();
 
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            //CheckIfValidTime();
+            if (Input.GetMouseButtonDown(0))
+            {
+                //CheckIfValidTime();
+            }
         }
-
 
     }
 

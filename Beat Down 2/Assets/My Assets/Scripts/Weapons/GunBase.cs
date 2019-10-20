@@ -207,9 +207,14 @@ public class GunBase : MonoBehaviour
             vfx.transform.SetParent(laserPoint);
             vfx.transform.localPosition = Vector3.zero;
             vfx.transform.localRotation = Quaternion.Euler(dir);
-            vfx.GetComponent<ProjectileMove>().creator = laserPoint;
-            vfx.transform.SetParent(null);
-            vfx.GetComponent<ProjectileMove>().damage = damage;
+            if (vfx.GetComponent<ProjectileMove>() != null)
+            {
+                vfx.GetComponent<ProjectileMove>().creator = laserPoint;
+                vfx.GetComponent<ProjectileMove>().damage = damage;
+                vfx.transform.SetParent(null);
+            }
+
+
         }
     }
 
