@@ -94,6 +94,8 @@ public class SongManager : MonoBehaviour
 
     public float startDelay;
     private bool started;
+
+    public float millisecondOffset;
     void Start()
     {
 
@@ -264,9 +266,8 @@ public class SongManager : MonoBehaviour
 
     public bool CheckIfValidTimeWithinFirepattern()
     {
-        float time = songPosition / secPerBeat;
+        float time = (songPosition / secPerBeat) + millisecondOffset;
         float targetBeat = Mathf.Round(time);
-        bool b = false;
         
         Debug.Log("VVVVVVVVVV");
         Debug.Log(time);
@@ -275,23 +276,27 @@ public class SongManager : MonoBehaviour
         Debug.Log(player.selectedWeapon.firePattern[(int)beatCount3]);
         Debug.Log("^^^^^^^^^^^^");
 
-        /*if(time > targetBeat)
+        //Have to decide if we're using the next beat or the last beat.
+        float a = Mathf.Ceil(time);
+        float b = Mathf.Floor(time);
+        float which = 0;
+        if (time < (a + b) / 2)
         {
-            if (beatCount3 == 0 && player.selectedWeapon.firePattern[7])
-            {
-                b = true;
-            }
+            which = -1;
+        }
+        else
+        {
+            which = 0;
+        }
+
+        if((int)beatCount3 + (int)which < 0)
+        {
+            which = 7;
+        }
 
 
-            if (beatCount3 != 0) {
-                if (player.selectedWeapon.firePattern[(int)beatCount3 - 1])
-                {
-                    b = true;
-                }
-                    }
-        }*/
-        
-        if (time >= (targetBeat) - judgmentTime && time <= (targetBeat) + judgmentTime && (player.selectedWeapon.firePattern[(int)beatCount3] || b))
+
+        if (time >= (targetBeat + millisecondOffset) - judgmentTime && time <= (targetBeat + millisecondOffset) + judgmentTime && (player.selectedWeapon.firePattern[(int)beatCount3 + (int)which]))
         {
             //Debug.Log("True");
             Color TC = hit.color;
@@ -319,7 +324,21 @@ public class SongManager : MonoBehaviour
         Debug.Log(Mathf.Round(time));
         Debug.Log("^^^^^^^^^^^^");
         */
-        if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime && player.selectedWeapon.chargePattern[(int)beatCount3])
+
+        //Have to decide if we're using the next beat or the last beat.
+        float a = Mathf.Ceil(time);
+        float b = Mathf.Floor(time);
+        float which = 0;
+        if(time < (a + b)/2)
+        {
+            which = -1;
+        }
+        else
+        {
+            which = 0;
+        }
+
+        if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime && player.selectedWeapon.chargePattern[(int)beatCount3 + (int)which])
         {
             //Debug.Log("True");
             Color TC = hit.color;
