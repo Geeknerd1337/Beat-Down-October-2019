@@ -266,7 +266,7 @@ public class SongManager : MonoBehaviour
 
     public bool CheckIfValidTimeWithinFirepattern()
     {
-        float time = (songPosition / secPerBeat) + millisecondOffset;
+        float time = ((songPosition + millisecondOffset) / secPerBeat);
         float targetBeat = Mathf.Round(time);
         
         Debug.Log("VVVVVVVVVV");
@@ -296,7 +296,7 @@ public class SongManager : MonoBehaviour
 
 
 
-        if (time >= (targetBeat + millisecondOffset) - judgmentTime && time <= (targetBeat + millisecondOffset) + judgmentTime && (player.selectedWeapon.firePattern[(int)beatCount3 + (int)which]))
+        if (time >= (targetBeat) - judgmentTime && time <= (targetBeat) + judgmentTime && (player.selectedWeapon.firePattern[(int)beatCount3 + (int)which]))
         {
             //Debug.Log("True");
             Color TC = hit.color;
