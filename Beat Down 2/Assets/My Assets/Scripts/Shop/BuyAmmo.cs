@@ -34,7 +34,6 @@ public class BuyAmmo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (player.money >= cost)
         {
             player.money -= cost;
-            myButton.interactable = false;
             player.ammoTypes[ammoType] += ammoAmt;
         }
     }

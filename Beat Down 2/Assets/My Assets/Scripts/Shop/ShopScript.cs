@@ -26,6 +26,7 @@ public class ShopScript : MonoBehaviour
         {
             ChangeState();
         }
+        UpdateCreditText();
     }
 
     void UpdateCreditText()

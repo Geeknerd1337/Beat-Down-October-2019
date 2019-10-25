@@ -45,6 +45,7 @@ public class GunBase : MonoBehaviour
     public float spread = 0f;
     public int numShots = 1;
     public int ammoType;
+    public bool infiniteAmmo;
 
 
     [Header("Projetile Information")]
@@ -148,7 +149,10 @@ public class GunBase : MonoBehaviour
             for (int i = 0; i < numShots; i++)
 
             {
-                player.ammoTypes[ammoType]--;
+                if (!infiniteAmmo)
+                {
+                    player.ammoTypes[ammoType]--;
+                }
                 RaycastHit hit;
                 Vector3 dir = Camera.main.transform.forward;
                 dir.x += Random.Range(-spread, spread);
@@ -383,6 +387,13 @@ public class GunBase : MonoBehaviour
 
     void UpdateText()
     {
-        ammoText.text = player.ammoTypes[ammoType].ToString();
+        if (!infiniteAmmo)
+        {
+            ammoText.text = player.ammoTypes[ammoType].ToString();
+        }
+        else
+        {
+            ammoText.text = "";
+        }
     }
 }

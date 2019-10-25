@@ -96,6 +96,13 @@ public class SongManager : MonoBehaviour
     private bool started;
 
     public float millisecondOffset;
+
+    [Header("Learning")]
+    public bool learning;
+    private int learningIndex;
+    [SerializeField]
+    private List<float> indices;
+
     void Start()
     {
 
@@ -180,6 +187,11 @@ public class SongManager : MonoBehaviour
 
                 }
 
+                if (learning)
+                {
+                    indicatorInstance.GetComponent<DescreaseSize>().c = Color.red;
+                }
+
             }
 
             //Set beat full D8 to be false
@@ -220,6 +232,21 @@ public class SongManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            learning = true;
+            learningIndex = 0;
+        }
+
+        //LEarning algorithm
+        if (learning)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                LearnOffset();
+            }
+        }
     }
 
 
@@ -371,9 +398,27 @@ public class SongManager : MonoBehaviour
     {
         return secPerBeat;
     }
-    
+
+
+    public void LearnOffset()
+    {
+        float time = songPosition / secPerBeat;
+        float targetBeat = Mathf.Round(time);
+        indices.Add(time-targetBeat);
+        learningIndex++;
         
-    
+        if(learningIndex > 3)
+        {
+            learning = false;
+            millisecondOffset = (indices[0] + indices[2] + indices[1] + indices[3]) / 4f;
+            learningIndex = 0;
+            indices.Clear();
+        }
+
+    }
 
 
-}
+
+
+
+    }
