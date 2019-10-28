@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     public List<int> ammoTypes;
 
     public int money;
+    public int combo;
+    public float comboTime;
+    public float comboTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +57,7 @@ public class Player : MonoBehaviour
         {
             ChangeWeapon();
         }
+        UpdateComboText();
     }
 
 
@@ -138,5 +142,19 @@ public class Player : MonoBehaviour
         guns[gunIndex].SetActive(true);
         selectedWeapon = guns[gunIndex].GetComponent<GunBase>();
         
+    }
+
+    public void UpdateComboText()
+    {
+        comboTimer += Time.deltaTime;
+        if(comboTimer > comboTime)
+        {
+            if(combo > 0)
+            {
+                combo--;
+                SongManager.ManagerInstance.CreateComboNum();
+            }
+            //comboTimer = 0;
+        }
     }
 }

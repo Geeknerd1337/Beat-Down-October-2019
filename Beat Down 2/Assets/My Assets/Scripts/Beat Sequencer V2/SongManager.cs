@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using System.Linq;
 
 public class SongManager : MonoBehaviour
 {
@@ -102,6 +103,10 @@ public class SongManager : MonoBehaviour
     private int learningIndex;
     [SerializeField]
     private List<float> indices;
+
+    [Header("Dealing With The Combo Counter")]
+    public GameObject comboPrefab;
+    public GameObject comboPlacement;
 
     void Start()
     {
@@ -329,18 +334,21 @@ public class SongManager : MonoBehaviour
             Color TC = hit.color;
             TC.a = 1;
             hit.color = TC;
+            player.combo++;
+            CreateComboNum();
             return true;
         }
         else
         {
             //Debug.Log("False");
+            player.combo = 0;
             return false;
         }
     }
 
     public bool CheckIfValidTimeWithinChargepattern()
     {
-        float time = songPosition / secPerBeat;
+        float time = ((songPosition + millisecondOffset) / secPerBeat);
         float targetBeat = Mathf.Round(time);
         /*
         Debug.Log("VVVVVVVVVV");
@@ -371,6 +379,8 @@ public class SongManager : MonoBehaviour
             Color TC = hit.color;
             TC.a = 1;
             hit.color = TC;
+
+
             return true;
         }
         else
@@ -404,17 +414,25 @@ public class SongManager : MonoBehaviour
     {
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
-        indices.Add(time-targetBeat);
+                
         learningIndex++;
         
-        if(learningIndex > 3)
+        if(learningIndex > 10)
         {
             learning = false;
-            millisecondOffset = (indices[0] + indices[2] + indices[1] + indices[3]) / 4f;
+            millisecondOffset = indices.Average();
             learningIndex = 0;
             indices.Clear();
         }
 
+    }
+
+    public void CreateComboNum()
+    {
+        GameObject g = Instantiate(comboPrefab, comboPlacement.transform);
+        g.transform.localPosition = Vector3.zero;
+        g.GetComponent<Text>().text = "x" + player.combo.ToString();
+        player.comboTimer = 0;
     }
 
 
