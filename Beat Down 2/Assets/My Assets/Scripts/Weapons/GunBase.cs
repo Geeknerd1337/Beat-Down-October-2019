@@ -77,6 +77,9 @@ public class GunBase : MonoBehaviour
     private bool canReset;
     private bool chargeFire;
 
+    public bool makeNoise;
+    public GameObject noise;
+
 
 
 
@@ -216,6 +219,12 @@ public class GunBase : MonoBehaviour
                 vfx.GetComponent<ProjectileMove>().creator = laserPoint;
                 vfx.GetComponent<ProjectileMove>().damage = damage;
                 vfx.transform.SetParent(null);
+            }
+
+
+            if (makeNoise)
+            {
+                Instantiate(noise);
             }
 
 

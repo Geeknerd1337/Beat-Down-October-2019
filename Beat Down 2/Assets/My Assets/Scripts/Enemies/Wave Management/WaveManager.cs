@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
@@ -43,6 +44,10 @@ public class WaveManager : MonoBehaviour
     [Header("Song Control")]
     public List<AudioSource> mainMelody;
     public List<AudioSource> breakDown;
+
+    public GameObject waveTextPrefab;
+    public GameObject UI;
+    private bool textSpawned = false;
 
 
     // Start is called before the first frame update
@@ -118,9 +123,21 @@ public class WaveManager : MonoBehaviour
             timer = 0;
             index++;
 
+
+            if (!textSpawned) {
+                wave++;
+                GameObject g2 = Instantiate(waveTextPrefab, UI.transform);
+                g2.transform.localPosition = Vector3.zero;
+                
+                textSpawned = true;
+
+            }
+
             if(index == maxEnemyCount)
             {
                 canWait = true;
+                textSpawned = false;
+
             }
         }
     }
