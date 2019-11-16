@@ -4849,7 +4849,7 @@ GameObject:
   - component: {fileID: 1530883718983656973}
   m_Layer: 0
   m_Name: Grenade
-  m_TagString: Untagged
+  m_TagString: Grenade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4962,6 +4962,7 @@ MonoBehaviour:
   explosion: {fileID: 3030572509357348179, guid: 978ddef58e3ada84e8e8f0884452b6d3,
     type: 3}
   muzzle: {fileID: 1964938012343455134, guid: d35369f24e39691448751c886e7f8d8c, type: 3}
+  sound: {fileID: 3503572086552781450, guid: a43833c834df9214591e03016982ae89, type: 3}
   dmg: 50
   range: 6
 --- !u!1 &7308286193198276470

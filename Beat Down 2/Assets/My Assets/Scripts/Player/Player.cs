@@ -69,6 +69,12 @@ public class Player : MonoBehaviour
 
     }
 
+    public void DamageD(float d)
+    {
+        playerHealth -= d;
+        regenTimer = 0;
+    }
+
     void Regen()
     {
         regenTimer += Time.deltaTime;

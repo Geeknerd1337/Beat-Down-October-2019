@@ -8,6 +8,9 @@ public class Grenade : MonoBehaviour
     public float upwardForce;
     public GameObject explosion;
     public GameObject muzzle;
+    public GameObject sound;
+    private bool b;
+    private GameObject[] check;
 
     public float dmg;
     public float range;
@@ -22,6 +25,16 @@ public class Grenade : MonoBehaviour
         Destroy(g, 2f);
 
         transform.SetParent(null);
+        b = false;
+
+        check = GameObject.FindGameObjectsWithTag("Grenade");
+        Debug.Log(check.Length);
+        if (check.Length == 1)
+        {
+            b = true;
+
+        }
+
         
     }
 
@@ -35,6 +48,10 @@ public class Grenade : MonoBehaviour
             AreaDamageEnemies(transform.position, range, dmg);
             Destroy(g, 5f);
             Destroy(gameObject);
+            if(b)
+            {
+                Instantiate(sound);
+            }
         }
     }
 

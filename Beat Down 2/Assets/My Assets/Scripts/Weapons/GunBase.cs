@@ -24,6 +24,7 @@ public class GunBase : MonoBehaviour
     public AudioSource myAudio;
     public float timeToIncreaseVolume;
     private float timer;
+    private int volumeMod = 1;
 
     [Header("Guns that use Visualization")]
     public bool visualShot;
@@ -235,7 +236,7 @@ public class GunBase : MonoBehaviour
     {
 
         //This is the event that will check the song manager and do logic for if a shot can be held down
-        
+        volumeMod = 1;
         if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;
@@ -283,12 +284,27 @@ public class GunBase : MonoBehaviour
         if (!chargeShot)
         {
             timer += Time.deltaTime;
+            if(player.combo == 0)
+            {
+                volumeMod = 0;
+            }
+
+            if (makeNoise)
+            {
+                volumeMod = 0;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
 
                 if (songManager.CheckIfValidTimeWithinFirepattern())
                 {
                     Shoot();
+                    volumeMod = 1;
+                }
+                else
+                {
+                    volumeMod = 0;
                 }
             }
            // Debug.Log("yellow");
@@ -307,6 +323,7 @@ public class GunBase : MonoBehaviour
                         chargeSound.volume = 1;
                         canReset = false;
                         chargeFire = false;
+                        volumeMod = 1;
                     }
                 }
             }
@@ -356,14 +373,14 @@ public class GunBase : MonoBehaviour
 
     void AdjustMyVolume()
     {
-        myAudio.volume = Mathf.Lerp(0, 1, timer / timeToIncreaseVolume);
+        myAudio.volume = Mathf.Lerp(0, 1, timer / timeToIncreaseVolume) * volumeMod;
         timer = Mathf.Clamp(timer, 0, timeToIncreaseVolume);
     }
 
     void AudioShot()
     {
         //This is the event that will check the song manager and do logic for if a shot can be held down and fires as a result of audio visualization
-
+        volumeMod = 1;
         if (Input.GetMouseButton(0))
         {
             timer += Time.deltaTime;
