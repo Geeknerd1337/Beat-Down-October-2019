@@ -54,6 +54,7 @@ public class SongManager : MonoBehaviour
     public float beatCountD8;
     public float beatCountD16;
     public float beatCount4;
+    public float beatCount5;
 
     //If the beat is full;
     public bool beatFull = false;
@@ -170,6 +171,39 @@ public class SongManager : MonoBehaviour
                 beatFull = true;
                 beatCount++;
                 beatCount3++;
+                //indicatorInstance = Instantiate(indicator, canvas.transform);
+
+                //indicatorInstance.transform.position = hit.transform.position;
+               // int index = indicatorInstance.transform.GetSiblingIndex();
+               // indicatorInstance.transform.SetSiblingIndex(index - 3);
+
+
+
+
+                if (beatCount3 > 7)
+                {
+                    beatCount3 = 0;
+                }
+
+
+                /*if (player.selectedWeapon.firePattern[(int)beatCount3])
+                {
+                    indicatorInstance.GetComponent<DescreaseSize>().c = rightBeatColor;
+
+
+                }
+
+                if (learning)
+                {
+                    indicatorInstance.GetComponent<DescreaseSize>().c = Color.red;
+                }*/
+
+            }
+
+            //Create the indicator instance
+            if (beatCount5 < (songPosition + millisecondOffset)/ secPerBeat)
+            {
+                beatCount5++;
                 indicatorInstance = Instantiate(indicator, canvas.transform);
 
                 indicatorInstance.transform.position = hit.transform.position;
@@ -281,7 +315,6 @@ public class SongManager : MonoBehaviour
         */
         if (time > (targetBeat) - judgmentTime && time < (targetBeat) + judgmentTime)
         {
-            //Debug.Log("True");
             Color TC = hit.color;
             TC.a = 1;
             hit.color = TC;
@@ -289,7 +322,7 @@ public class SongManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log("False");
+
             return false;
         }
 

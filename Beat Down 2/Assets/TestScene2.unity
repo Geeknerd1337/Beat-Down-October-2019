@@ -141,7 +141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &37330843
 MonoBehaviour:
@@ -44367,7 +44367,7 @@ RectTransform:
   - {fileID: 378242716}
   - {fileID: 1129772474}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -67937,6 +67937,7 @@ MonoBehaviour:
   beatCountD8: 0
   beatCountD16: 0
   beatCount4: 0
+  beatCount5: 0
   beatFull: 0
   beatFullD8: 0
   beatFullD16: 0
@@ -67976,7 +67977,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2042179097
 AudioSource:
@@ -69489,7 +69490,7 @@ PrefabInstance:
     - target: {fileID: 7669294736613728023, guid: ab76e53b9dfa46c4c92680e699fcf928,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7669294736613728023, guid: ab76e53b9dfa46c4c92680e699fcf928,
         type: 3}

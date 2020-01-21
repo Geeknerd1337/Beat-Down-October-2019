@@ -16,14 +16,14 @@ public class DescreaseSize : MonoBehaviour
     {
         s = SongManager.ManagerInstance;
         GetComponent<Image>().color = c;
-        initTime = s.GetSP();
+        initTime = (s.GetSP());
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = Vector3.Lerp(new Vector3(newScale, newScale, newScale), new Vector3(oldScale, oldScale, oldScale), time / s.GetSecPerBeat());
-        time = s.GetSP()  - initTime;
+        transform.localScale = Vector3.Lerp(new Vector3(newScale, newScale, newScale), new Vector3(oldScale, oldScale, oldScale), time / (s.GetSecPerBeat()));
+        time = (s.GetSP())  - initTime;
 
 
         if(transform.localScale == new Vector3(oldScale, oldScale, oldScale))
