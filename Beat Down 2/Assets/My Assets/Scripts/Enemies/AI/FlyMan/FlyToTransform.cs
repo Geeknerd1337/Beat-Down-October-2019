@@ -20,6 +20,7 @@ public class FlyToTransform : MonoBehaviour
     public float range;
 
     public GameObject parent;
+    public Transform bee;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +32,33 @@ public class FlyToTransform : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        FollowTargetWithRotation(target, 1f, speed);
+    { 
 
         if(Vector3.Distance(transform.position,p.transform.position) < diveDistance)
         {
+            FollowTargetWithRotation(target, 1f, speed);
             target = p.transform;
+            bee.transform.LookAt(p.transform);
             speed = 20f;
+        }
+        else
+        {
+            // Determine which direction to rotate towards
+            Vector3 targetDirection = p.transform.position - bee.position;
+
+            // The step size is equal to speed times frame time.
+            float singleStep = 2 * Time.deltaTime;
+
+            // Rotate the forward vector towards the target direction by one step
+            Vector3 newDirection = Vector3.RotateTowards(bee.transform.forward, targetDirection, singleStep, 0.0f);
+
+            // Draw a ray pointing at our target in
+            Debug.DrawRay(transform.position, newDirection, Color.red);
+
+            // Calculate a rotation a step closer to the target and applies rotation to this object
+            bee.transform.rotation = Quaternion.LookRotation(newDirection);
+            FollowTargetWitouthRotation(target, 1f, speed);
+
         }
 
 
@@ -65,6 +86,7 @@ public class FlyToTransform : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) > distanceToStop)
         {
             transform.LookAt(target);
+            
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Force);
         }
     }

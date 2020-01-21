@@ -6666,7 +6666,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112082316}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11894,7 +11894,7 @@ MonoBehaviour:
   idleEuler: {x: 0, y: 180, z: 0}
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
-  held: 0
+  held: 1
   myAudio: {fileID: 313308260}
   timeToIncreaseVolume: 0.1
   visualShot: 0
@@ -11917,7 +11917,7 @@ MonoBehaviour:
   - {fileID: 2979017619440324742, guid: f9ca57539a14f8b4884db6c1ba07f8f0, type: 3}
   useSequencer: 1
   useSequencer2: 0
-  sequence: 00010000010000010000010000010000000000000100000101000000010100010101010101010101010101010101010101010101010101010101010101010101
+  sequence: 01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   sequence2: 01000100010001000100010001000100
   firePattern: 0001000100010001
   chargePattern: 0000000000000000
@@ -20360,6 +20360,7 @@ MonoBehaviour:
   dmg: 20
   range: 5
   parent: {fileID: 1018493800}
+  bee: {fileID: 1365851347}
 --- !u!54 &649942418
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20447,7 +20448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
-  r: {fileID: 649942420}
+  r: {fileID: 1341176965}
   partSystem: {fileID: 700920873}
   parent: {fileID: 649942415}
 --- !u!1 &650311633
@@ -58298,6 +58299,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6463047933594657248, guid: 67bfefaef28fea94996e3f266b21f283,
     type: 3}
   m_PrefabInstance: {fileID: 1463879996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1341176965 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700000, guid: 8dc7133dabae0e046b262592536d4f36,
+    type: 3}
+  m_PrefabInstance: {fileID: 1575599609}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1361776425 stripped
 GameObject:
