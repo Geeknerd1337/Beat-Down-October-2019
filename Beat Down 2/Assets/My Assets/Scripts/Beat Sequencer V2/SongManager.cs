@@ -301,12 +301,14 @@ public class SongManager : MonoBehaviour
         float time = ((songPosition + millisecondOffset) / secPerBeat);
         float targetBeat = Mathf.Round(time);
         
+        /*
         Debug.Log("VVVVVVVVVV");
         Debug.Log(time);
         Debug.Log(targetBeat);
         Debug.Log(Mathf.Round(time));
         Debug.Log(player.selectedWeapon.firePattern[(int)beatCount3]);
         Debug.Log("^^^^^^^^^^^^");
+        */
 
         //Have to decide if we're using the next beat or the last beat.
         float a = Mathf.Ceil(time);
@@ -414,13 +416,20 @@ public class SongManager : MonoBehaviour
     {
         float time = songPosition / secPerBeat;
         float targetBeat = Mathf.Round(time);
-                
+        Debug.Log(time - targetBeat);
+        indices.Add(time - targetBeat);        
+
         learningIndex++;
         
         if(learningIndex > 10)
         {
             learning = false;
-            millisecondOffset = indices.Average();
+            float b = 0;
+            for(int i = 0; i < indices.Count; i++)
+            {
+                b += indices[i];
+            }
+            millisecondOffset = b / indices.Count;
             learningIndex = 0;
             indices.Clear();
         }

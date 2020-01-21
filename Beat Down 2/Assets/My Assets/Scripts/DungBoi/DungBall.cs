@@ -16,6 +16,10 @@ public class DungBall : MonoBehaviour
 
     public float targetScale;
     float curScale = 0.1f;
+    public float explosionDistance;
+    public float dmg;
+    public float range;
+    public GameObject explosion;
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,6 +40,20 @@ public class DungBall : MonoBehaviour
         {
             transform.SetParent(null);
             launchBall = true;
+        }
+
+        if (Vector3.Distance(transform.position, player.position) < explosionDistance)
+        {
+            ParticleSystem[] ps = explosion.GetComponentsInChildren<ParticleSystem>();
+            ps[0].Play();
+            ps[1].Play();
+            explosion.transform.SetParent(null);
+            AreaDamageEnemies(transform.position, range, dmg);
+            Destroy(explosion, 2f);
+            Destroy(gameObject);
+
+
+
         }
     }
 
@@ -92,6 +110,25 @@ public class DungBall : MonoBehaviour
             );*/
         }
                 
+
+    }
+
+    void AreaDamageEnemies(Vector3 location, float radius, float damage)
+    {
+        Collider[] objectsInRange = Physics.OverlapSphere(location, radius);
+        foreach (Collider col in objectsInRange)
+        {
+            Player enemy = col.GetComponent<Player>();
+            if (enemy != null)
+            {
+                // linear falloff of effect
+                float proximity = (location - enemy.transform.position).magnitude;
+                float effect = 1 - (proximity / radius);
+
+
+                enemy.DamageD(damage * effect);
+            }
+        }
 
     }
 }
