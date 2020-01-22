@@ -99,6 +99,7 @@ public class FlyToTransform : MonoBehaviour
             direction = target.position - transform.position;
             rb.AddRelativeForce(direction.normalized * speed, ForceMode.Force);
         }
+
     }
 
     void OnDrawGizmosSelected()
@@ -106,6 +107,7 @@ public class FlyToTransform : MonoBehaviour
         // Display the explosion radius when selected
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, diveDistance);
+        Debug.DrawRay(transform.position, target.position - transform.position, Color.red);
     }
 
     void AreaDamageEnemies(Vector3 location, float radius, float damage)
