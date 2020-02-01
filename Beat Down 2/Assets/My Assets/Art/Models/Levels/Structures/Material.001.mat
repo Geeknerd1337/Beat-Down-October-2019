@@ -97,6 +97,6 @@ Material:
     - _Color: {r: 0, g: 0.22081897, b: 1, a: 1}
     - _DissolveColor: {r: 1, g: 0.78999996, b: 0.909, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RimColor: {r: 0.6687448, g: 1, b: 0, a: 1}
+    - _RimColor: {r: 0, g: 0.8842337, b: 1, a: 1}
     - _SColor: {r: 1, g: 1, b: 1, a: 1}
     - _TColor: {r: 1, g: 1, b: 1, a: 1}
