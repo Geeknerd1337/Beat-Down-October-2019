@@ -5,6 +5,7 @@ namespace DitzelGames.FastIK
     public class SampleSinMover : MonoBehaviour
     {
         public Vector3 Dir;
+        public float Spd;
         public Vector3 Start;
 
         private void Awake()
@@ -15,7 +16,7 @@ namespace DitzelGames.FastIK
         void Update()
         {
             //just move the object from a to b and back
-            transform.position = Start + Dir * Mathf.Sin(Time.timeSinceLevelLoad);
+            transform.position = Start + Dir * Mathf.Sin(Time.timeSinceLevelLoad * Spd);
         }
     }
 }
