@@ -64,7 +64,7 @@ public class WaveManager : MonoBehaviour
     {
         if (!canWait)
         {
-            StartWave();
+            //StartWave();
 
         }
 
