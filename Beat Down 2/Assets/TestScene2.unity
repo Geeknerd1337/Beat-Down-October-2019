@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0021611045, g: 0.016664911, b: 0.030920867, a: 1}
+  m_IndirectSpecularColor: {r: 0.0020258897, g: 0.016698275, b: 0.031032048, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -528,7 +528,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &37330843
 MonoBehaviour:
@@ -15128,7 +15128,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_Name
@@ -15160,7 +15160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6227417
+      value: 0.005996704
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -15683,6 +15683,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0001000100010001
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 1596702345}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -23693,7 +23694,7 @@ MonoBehaviour:
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
   held: 1
-  myAudio: {fileID: 313308260}
+  myAudio: {fileID: 1960050909}
   timeToIncreaseVolume: 0.1
   visualShot: 0
   audioCutOff: {x: 0, y: 0}
@@ -23719,6 +23720,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0001000100010001
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 1068140039}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -25275,6 +25277,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0100000000000000
   chargePattern: 0100000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 594334140}
   chargeSound: {fileID: 1990721323}
   chargeShot: 1
@@ -34249,7 +34252,7 @@ MonoBehaviour:
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
   held: 0
-  myAudio: {fileID: 830610033}
+  myAudio: {fileID: 1554615472}
   timeToIncreaseVolume: 0.1
   visualShot: 0
   audioCutOff: {x: 0, y: 0}
@@ -34275,6 +34278,7 @@ MonoBehaviour:
   sequence2: 00000000000000000000000000000000
   firePattern: 0101010101010101
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 899679450}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -46618,6 +46622,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739765432}
   m_CullTransparentMesh: 0
+--- !u!1 &741615767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7085721664118310506, guid: c2dc14f109b09a743b03757ef68006c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018655244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &741615775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741615767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592b9cae7f8a8334fa8ab6b6547c4b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  healthSlider: {fileID: 442534595}
+  regenTime: 4
+  regenRate: 4
+  selectedWeapon: {fileID: 1361776428}
+  weaponMusic: []
+  guns:
+  - {fileID: 657438944}
+  - {fileID: 1961833949}
+  - {fileID: 944966376}
+  - {fileID: 498803197}
+  - {fileID: 1981539133}
+  - {fileID: 1070833548}
+  ammoTypes: d0070000d0070000d0070000d0070000d0070000d0070000
+  money: 1000
+  combo: 0
+  comboTime: 2
+  comboTimer: 0
 --- !u!4 &746911920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3254171921341085305, guid: d1574c9db52e23e43bef9536150251b9,
@@ -51508,6 +51548,86 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2005577890}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &882383198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882383199}
+  - component: {fileID: 882383200}
+  m_Layer: 0
+  m_Name: ViewCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &882383199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882383198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 657438945}
+  - {fileID: 1961833950}
+  - {fileID: 944966377}
+  - {fileID: 498803198}
+  - {fileID: 1145890042}
+  - {fileID: 1981539134}
+  - {fileID: 1070833549}
+  m_Father: {fileID: 761320474}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &882383200
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882383198}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_GateFitMode: 2
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!4 &884091599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3003614562263070992, guid: 1fe1aab4cb546ec4b9787008699ad1ae,
@@ -52095,6 +52215,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0100010001000100
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 953319850}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -52776,7 +52897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942652968}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.31004333, y: 0.5969963, z: -3.4207458}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1554615470}
@@ -52818,7 +52939,7 @@ MonoBehaviour:
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
   held: 0
-  myAudio: {fileID: 67876096}
+  myAudio: {fileID: 674077394}
   timeToIncreaseVolume: 0.1
   visualShot: 1
   audioCutOff: {x: 0.7, y: 0.6}
@@ -52844,6 +52965,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0100010001000100
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 739765434}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -52906,6 +53028,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0100010001000100
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 1812279054}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -58220,6 +58343,7 @@ MonoBehaviour:
   sequence2: 00000000000000000000000000000000
   firePattern: 0101010101010101
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 792789543}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -58326,7 +58450,7 @@ RectTransform:
   - {fileID: 378242716}
   - {fileID: 1129772474}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -59535,7 +59659,7 @@ MonoBehaviour:
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
   held: 0
-  myAudio: {fileID: 1817468185}
+  myAudio: {fileID: 47200993}
   timeToIncreaseVolume: 0.1
   visualShot: 0
   audioCutOff: {x: 0, y: 0}
@@ -59562,6 +59686,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0001010101010101
   chargePattern: 0100000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 83732326}
   chargeSound: {fileID: 1990721323}
   chargeShot: 0
@@ -59952,7 +60077,7 @@ Transform:
   - {fileID: 748522969}
   - {fileID: 1289899725}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1119295220 stripped
 Transform:
@@ -60503,6 +60628,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1832232515}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1145890042 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92,
+    type: 3}
+  m_PrefabInstance: {fileID: 1832232515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1145890043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60547,6 +60678,7 @@ MonoBehaviour:
   sequence2: 00000000000000000000000000000000
   firePattern: 0101010101010101
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 899679450}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -75403,7 +75535,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_Name
@@ -75435,7 +75567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6227417
+      value: 0.005996704
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -75661,6 +75793,7 @@ MonoBehaviour:
   sequence2: 00000000000000000000000000000000
   firePattern: 0101010101010101
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 792789543}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -76814,7 +76947,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_Name
@@ -76850,7 +76983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6227417
+      value: 0.005996704
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -80851,7 +80984,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_Name
@@ -80883,7 +81016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6227417
+      value: 0.005996704
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -81860,6 +81993,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0001010101010101
   chargePattern: 0100000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 1777474809}
   chargeSound: {fileID: 1990721323}
   chargeShot: 0
@@ -82258,7 +82392,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100006, guid: 131024cf3c1e53e459ae6aa63f1f7f84, type: 3}
       propertyPath: m_Name
@@ -82290,7 +82424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 131024cf3c1e53e459ae6aa63f1f7f84, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.738739
+      value: -0.11000061
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 131024cf3c1e53e459ae6aa63f1f7f84, type: 3}
       propertyPath: m_LocalRotation.x
@@ -86107,7 +86241,7 @@ PrefabInstance:
     - target: {fileID: 6521004672088870195, guid: 8d0d31a67b391574d9acdea09feafca3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6521004672088870195, guid: 8d0d31a67b391574d9acdea09feafca3,
         type: 3}
@@ -86250,7 +86384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3224dec05ee7fd241b17e76ff874bbe5, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3224dec05ee7fd241b17e76ff874bbe5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -88544,7 +88678,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_Name
@@ -88576,7 +88710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6227417
+      value: 0.005996704
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -88942,7 +89076,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 761320474}
+    m_TransformParent: {fileID: 882383199}
     m_Modifications:
     - target: {fileID: 100004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_Name
@@ -88974,7 +89108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.6227417
+      value: 0.005996704
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b006d7b1848e8da4d93804ba9f7afe92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -91719,7 +91853,7 @@ MonoBehaviour:
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
   held: 1
-  myAudio: {fileID: 425960041}
+  myAudio: {fileID: 538727203}
   timeToIncreaseVolume: 0.1
   visualShot: 0
   audioCutOff: {x: 0, y: 0}
@@ -91745,6 +91879,7 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0100010001000100
   chargePattern: 0000000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 1479833336}
   chargeSound: {fileID: 0}
   chargeShot: 0
@@ -92350,7 +92485,7 @@ MonoBehaviour:
   shotPosition: {x: 0, y: 0, z: 0}
   shotEuler: {x: 15, y: 180, z: 0}
   held: 0
-  myAudio: {fileID: 846132410}
+  myAudio: {fileID: 128504653}
   timeToIncreaseVolume: 0.1
   visualShot: 0
   audioCutOff: {x: 0, y: 0}
@@ -92376,8 +92511,9 @@ MonoBehaviour:
   sequence2: 01000100010001000100010001000100
   firePattern: 0100000000000000
   chargePattern: 0100000000000000
+  player: {fileID: 0}
   ammoText: {fileID: 269282973}
-  chargeSound: {fileID: 1990721323}
+  chargeSound: {fileID: 1790815097}
   chargeShot: 1
   charging: 0
   makeNoise: 0
@@ -93010,7 +93146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -93290,7 +93426,7 @@ PrefabInstance:
     - target: {fileID: 7085721664118310500, guid: c2dc14f109b09a743b03757ef68006c7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7085721664118310500, guid: c2dc14f109b09a743b03757ef68006c7,
         type: 3}
@@ -93306,6 +93442,19 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085721663646366574, guid: c2dc14f109b09a743b03757ef68006c7,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 32055
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
+      propertyPath: walkSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
+      propertyPath: runSpeed
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
@@ -93453,7 +93602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: 0284acb02ad585e4fbdfd0a6fb3e67b1, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: 0284acb02ad585e4fbdfd0a6fb3e67b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -93694,7 +93843,7 @@ MonoBehaviour:
   - {fileID: 285503876}
   - {fileID: 748522971}
   - {fileID: 1289899727}
-  player: {fileID: 1459230849}
+  player: {fileID: 741615775}
   rightBeatColor: {r: 0.9433962, g: 0.743147, b: 0.93862504, a: 1}
   startDelay: 1
   millisecondOffset: 0
@@ -93715,7 +93864,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2042179097
 AudioSource:
@@ -96492,7 +96641,7 @@ PrefabInstance:
     - target: {fileID: 7669294736613728023, guid: ab76e53b9dfa46c4c92680e699fcf928,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7669294736613728023, guid: ab76e53b9dfa46c4c92680e699fcf928,
         type: 3}

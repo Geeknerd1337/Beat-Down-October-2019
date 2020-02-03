@@ -66,6 +66,7 @@ public class GunBase : MonoBehaviour
 
 
     [Header("Misc")]
+    [SerializeField]
     private Player player;
     public TextMeshProUGUI ammoText;
 
@@ -288,11 +289,13 @@ public class GunBase : MonoBehaviour
             if(player.combo == 0)
             {
                 volumeMod = 0;
+                Debug.Log("yellow");
             }
 
             if (makeNoise)
             {
                 volumeMod = 0;
+
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -306,9 +309,10 @@ public class GunBase : MonoBehaviour
                 else
                 {
                     volumeMod = 0;
+                    
                 }
             }
-           // Debug.Log("yellow");
+
         }
         else
         {
