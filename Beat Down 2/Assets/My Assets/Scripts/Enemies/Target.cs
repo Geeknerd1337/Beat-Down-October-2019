@@ -11,6 +11,7 @@ public class Target : MonoBehaviour
     private float healthValue;
     public GameObject partSystem;
     public GameObject parent;
+    public GameObject gem;
 
 
     // Start is called before the first frame update
@@ -50,6 +51,13 @@ public class Target : MonoBehaviour
 
     void Die()
     {
+        int i = Random.Range(0, 4);
+        for(int b = 0; b < i; b++)
+        {
+            GameObject g = Instantiate(gem);
+            g.transform.SetParent(null);
+            g.transform.position = transform.position;
+        }
         partSystem.transform.SetParent(null);
         partSystem.GetComponent<ParticleSystem>().Play();
         Destroy(partSystem, 6f);

@@ -11,6 +11,7 @@ public class SpawnEnemy : MonoBehaviour
     private float scaleLerp;
     private float amt = 0f;
     private bool madeEnemy = false;
+    public ArenaManager myManager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,7 @@ public class SpawnEnemy : MonoBehaviour
                 GameObject g = Instantiate(enemyToSpawn);
                 g.transform.position = transform.position;
                 madeEnemy = true;
+                myManager.spawnedEnemies.Add(g);
             }
             amt += Time.deltaTime;
             r.material.SetFloat("_Amount", amt);

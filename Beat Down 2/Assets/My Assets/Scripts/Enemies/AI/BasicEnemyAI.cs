@@ -13,6 +13,7 @@ public class BasicEnemyAI : MonoBehaviour
 
 
     private NavMeshAgent agent;
+    [SerializeField]
     private Transform player;
 
     public GameObject projectilePrefab;
@@ -22,6 +23,8 @@ public class BasicEnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        FindObjectOfType<NavMeshSurface>().enabled = true;
+
     }
 
     // Update is called once per frame
@@ -30,6 +33,10 @@ public class BasicEnemyAI : MonoBehaviour
         Search();
     }
 
+    private void Awake()
+    {
+        FindObjectOfType<NavMeshSurface>().enabled = false;
+    }
 
     void Search()
     {

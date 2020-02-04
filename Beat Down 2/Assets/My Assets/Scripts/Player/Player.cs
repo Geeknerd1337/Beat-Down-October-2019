@@ -42,9 +42,9 @@ public class Player : MonoBehaviour
         }
 
         int b = guns.Count;
-        for (int i = 1; i < b; i++)
+        for (int i = 2; i < b; i++)
         {
-            guns.RemoveAt(1);
+            //guns.RemoveAt(1);
         }
     }
 

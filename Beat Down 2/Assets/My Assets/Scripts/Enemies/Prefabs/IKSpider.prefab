@@ -127,6 +127,7 @@ MonoBehaviour:
   r: {fileID: 88555782430156660}
   partSystem: {fileID: 88555782921740248}
   parent: {fileID: 88555782653192188}
+  gem: {fileID: 186296152650139073, guid: 8c92c67211e97a342bf62aaf927b09f9, type: 3}
 --- !u!1 &88555781220860468
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +912,26 @@ MonoBehaviour:
   R2LegStepper: {fileID: 88555782537303908}
   R3LegStepper: {fileID: 88555782072443457}
   R4LegStepper: {fileID: 88555781869261182}
---- !u!195 &88555782427077950
+--- !u!114 &88555782427077951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88555782427044816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90d4ef84a7891941bb69d9f790fae74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 1
+  shootDistance: 40
+  shootTime: 0.48
+  player: {fileID: 0}
+  projectilePrefab: {fileID: 2979017619440324742, guid: f9ca57539a14f8b4884db6c1ba07f8f0,
+    type: 3}
+  firePoint: {fileID: 88555782554748669}
+--- !u!195 &444123869940231438
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -933,24 +953,6 @@ NavMeshAgent:
   m_BaseOffset: -0.38
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &88555782427077951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88555782427044816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e90d4ef84a7891941bb69d9f790fae74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 1
-  shootDistance: 40
-  shootTime: 0.48
-  projectilePrefab: {fileID: 2979017619440324742, guid: f9ca57539a14f8b4884db6c1ba07f8f0,
-    type: 3}
-  firePoint: {fileID: 88555782554748669}
 --- !u!54 &88555782427077930
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -967,19 +969,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &88555782427077928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 88555782427044818}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dffe231e7275fd4f8537db7fba1f9e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
 --- !u!145 &780092326
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -1003,6 +992,19 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &88555782427077928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88555782427044818}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dffe231e7275fd4f8537db7fba1f9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
 --- !u!114 &88555782427077920
 MonoBehaviour:
   m_ObjectHideFlags: 0
