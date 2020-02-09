@@ -12,6 +12,12 @@ public class GunBase : MonoBehaviour
     public Vector3 idleAnim;
     public Vector3 idleEuler;
 
+    [Header("Gun Sway")]
+    public float swayIntensity;
+    public float smooth;
+    [SerializeField]
+    private Quaternion originRotation;
+
     //Vectors for when the gun is shot
     [Header("Shot")]
     public Vector3 shotPosition;
@@ -112,6 +118,7 @@ public class GunBase : MonoBehaviour
         effectTospawn = projectileVfx[0];
 
         player = FindObjectOfType<Player>();
+        originRotation = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -143,8 +150,16 @@ public class GunBase : MonoBehaviour
 
     void LerpIdle()
     {
+
+        float mouse_x = Input.GetAxis("Mouse X");
+        float mouse_y = Input.GetAxis("Mouse Y");
+
+        Quaternion adjustment = Quaternion.AngleAxis(swayIntensity * -1f * mouse_x, Vector3.up);
+        Quaternion adjustmentY = Quaternion.AngleAxis(swayIntensity * -1f * mouse_y, Vector3.right);
+        Quaternion targetRotation = originRotation * adjustment * adjustmentY * Quaternion.Euler(idleEuler.x, idleEuler.y, idleEuler.z);
+
         transform.localPosition = Vector3.Lerp(transform.localPosition, idlePosition + new Vector3(Mathf.PerlinNoise(Time.time, Time.time) * idleAnim.x, Mathf.Sin(Time.time) * idleAnim.y, Mathf.PerlinNoise(Time.time, Time.time) * idleAnim.z), 0.3f);
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(idleEuler.x, idleEuler.y, idleEuler.z), 0.3f);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, targetRotation, 0.3f);
     }
 
     void Shoot()

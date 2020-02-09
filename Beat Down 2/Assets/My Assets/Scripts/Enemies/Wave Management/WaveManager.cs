@@ -44,6 +44,7 @@ public class WaveManager : MonoBehaviour
     [Header("Song Control")]
     public List<AudioSource> mainMelody;
     public List<AudioSource> breakDown;
+    public AudioSource ambience;
 
     public GameObject waveTextPrefab;
     public GameObject UI;
@@ -53,14 +54,57 @@ public class WaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(AudioSource a in breakDown)
+        foreach(AudioSource a in mainMelody)
         {
             a.volume = 0;
         }
+        foreach (AudioSource a in breakDown)
+        {
+            a.volume = 0;
+        }
+        ambience.volume = 1;
     }
 
     // Update is called once per frame
     void Update()
+    {
+
+        
+    }
+
+    IEnumerator ChangeVolume(AudioSource a, float f)
+    {
+
+        while (a.volume != f)
+        {
+            yield return new WaitForSeconds(Time.deltaTime);
+            a.volume = Approach(a.volume, f, Time.deltaTime/3f);
+            if(a.volume == f)
+            {
+                yield break;
+            }
+        }
+    }
+
+    public void StartWaveMusic()
+    {
+        foreach (AudioSource a in mainMelody)
+        {
+            StartCoroutine(ChangeVolume(a, 1f));
+        }
+        StartCoroutine(ChangeVolume(ambience, 0));
+    }
+
+    public void EndWaveMusic()
+    {
+        foreach (AudioSource a in mainMelody)
+        {
+            StartCoroutine(ChangeVolume(a, 0f));
+        }
+        StartCoroutine(ChangeVolume(ambience, 1f));
+    }
+
+    void OldWaveInit()
     {
         if (!canWait)
         {
@@ -68,7 +112,7 @@ public class WaveManager : MonoBehaviour
 
         }
 
-        if(waveTimer == 0 && enemyCount > 0)
+        if (waveTimer == 0 && enemyCount > 0)
         {
             if ((SongManager.ManagerInstance.beatCount3 == 1) && breakDown[0].volume == 1 && SongManager.ManagerInstance.beatFull)
             {
@@ -83,7 +127,7 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        if(canWait && enemyCount == 0)
+        if (canWait && enemyCount == 0)
         {
             waveTimer += Time.deltaTime;
             if ((SongManager.ManagerInstance.beatCount3 == 1) && breakDown[0].volume == 0 && SongManager.ManagerInstance.beatFull)
@@ -107,9 +151,7 @@ public class WaveManager : MonoBehaviour
 
             }
         }
-        
     }
-
 
     void StartWave()
     {
@@ -141,4 +183,22 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
+
+    float Approach(float current, float target, float spd)
+    {
+        if (current < target)
+        {
+            current += spd;
+            if (current > target)
+                return target;
+        }
+        else
+        {
+            current -= spd;
+            if (current < target)
+                return target;
+        }
+        return current;
+    }
+
 }

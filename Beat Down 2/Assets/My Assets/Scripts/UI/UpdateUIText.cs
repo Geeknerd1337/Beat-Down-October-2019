@@ -16,6 +16,6 @@ public class UpdateUIText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        creditsText.text = "Credits: $" + player.money.ToString();
+        creditsText.text = "Crystals: " + player.money.ToString();
     }
 }

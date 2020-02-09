@@ -21,6 +21,7 @@ public class ArenaManager : MonoBehaviour
     private int spawnIndex;
     public bool started = false;
     private bool cr_running = false;
+    private bool ended = false;
 
 
     [Header("Force Fields")]
@@ -46,8 +47,14 @@ public class ArenaManager : MonoBehaviour
             index++;
             if (index >= waves.Count)
             {
-                force1.SetActive(false);
-                force2.SetActive(false);
+                
+                if (!ended)
+                {
+                    force1.SetActive(false);
+                    force2.SetActive(false);
+                    FindObjectOfType<WaveManager>().EndWaveMusic();
+                    ended = true;
+                }
             }
             else
             {
@@ -65,6 +72,7 @@ public class ArenaManager : MonoBehaviour
             force1.SetActive(true);
             force2.SetActive(true);
             StartCoroutine("SpawnEnemies");
+            FindObjectOfType<WaveManager>().StartWaveMusic();
         }
     }
 
