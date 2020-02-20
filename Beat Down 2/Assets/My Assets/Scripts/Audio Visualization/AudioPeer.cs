@@ -35,7 +35,7 @@ public class AudioPeer : MonoBehaviour
         GetSpectrumAudioSource();
         MakeFrequencyBands();
         BandBuffer();
-        //SampleBuffer();
+        SampleBuffer();
         CreateAudioBands();
     }
 
@@ -78,7 +78,7 @@ public class AudioPeer : MonoBehaviour
             if(_freqBand[g] > _bandBuffer[g])
             {
                 _bandBuffer[g] = _freqBand[g];
-                _bufferDecrease[g] = 0.005f;
+                _bufferDecrease[g] = 0.01f;
             }
             if (_freqBand[g] < _bandBuffer[g])
             {
