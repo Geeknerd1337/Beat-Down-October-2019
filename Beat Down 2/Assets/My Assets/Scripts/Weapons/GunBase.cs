@@ -155,7 +155,7 @@ public class GunBase : MonoBehaviour
         float mouse_y = Input.GetAxis("Mouse Y");
 
         Quaternion adjustment = Quaternion.AngleAxis(swayIntensity * -1f * mouse_x, Vector3.up);
-        Quaternion adjustmentY = Quaternion.AngleAxis(swayIntensity * -1f * mouse_y, Vector3.right);
+        Quaternion adjustmentY = Quaternion.AngleAxis(swayIntensity * 1f * mouse_y, Vector3.right);
         Quaternion targetRotation = originRotation * adjustment * adjustmentY * Quaternion.Euler(idleEuler.x, idleEuler.y, idleEuler.z);
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, idlePosition + new Vector3(Mathf.PerlinNoise(Time.time, Time.time) * idleAnim.x, Mathf.Sin(Time.time) * idleAnim.y, Mathf.PerlinNoise(Time.time, Time.time) * idleAnim.z), 0.3f);
