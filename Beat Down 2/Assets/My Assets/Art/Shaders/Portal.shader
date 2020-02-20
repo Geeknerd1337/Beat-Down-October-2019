@@ -17,6 +17,7 @@ Shader "Shader Forge/Portal" {
             "IgnoreProjector"="True"
             "Queue"="Transparent"
             "RenderType"="Transparent"
+
         }
         Pass {
             Name "FORWARD"
@@ -25,7 +26,7 @@ Shader "Shader Forge/Portal" {
             }
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
-            
+            Cull Off
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
