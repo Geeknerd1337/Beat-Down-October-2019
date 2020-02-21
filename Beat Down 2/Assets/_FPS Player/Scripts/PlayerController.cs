@@ -43,6 +43,9 @@ public class PlayerController : MonoBehaviour
 
     int wallDir = 1;
 
+    private SongManager songmanager;
+    private bool doubleJumped;
+
     private void Start()
     {
         CreateVaultHelper();
@@ -58,6 +61,8 @@ public class PlayerController : MonoBehaviour
         halfradius = radius / 2f;
         halfheight = height / 2f;
         rayDistance = halfheight + radius + .1f;
+
+        songmanager = SongManager.ManagerInstance;
     }
 
     /******************************* UPDATE ******************************/

@@ -12,6 +12,7 @@ public class Target : MonoBehaviour
     public GameObject partSystem;
     public GameObject parent;
     public GameObject gem;
+    private AudioSource deathSound;
 
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class Target : MonoBehaviour
         r.material = new Material(r.material);
         maxHealth = health;
         healthValue = 0;
+        deathSound = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -51,6 +53,10 @@ public class Target : MonoBehaviour
 
     void Die()
     {
+        deathSound.pitch = Random.Range(0.95f, 1.05f);
+        deathSound.Play(); 
+        deathSound.transform.SetParent(null);
+        Destroy(deathSound.gameObject, 3f);
         int i = Random.Range(0, 4);
         for(int b = 0; b < i; b++)
         {

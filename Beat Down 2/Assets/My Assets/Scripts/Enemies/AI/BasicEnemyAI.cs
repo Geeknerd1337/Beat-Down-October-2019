@@ -79,7 +79,7 @@ public class BasicEnemyAI : MonoBehaviour
                 vfx.transform.SetParent(firePoint);
                 vfx.transform.localPosition = Vector3.zero;
                 vfx.transform.localRotation = Quaternion.Euler(Vector3.zero);
-
+                vfx.transform.LookAt(player.transform.position);
                 vfx.GetComponent<ProjectileMove>().creator = firePoint;
                 vfx.GetComponent<ProjectileMove>().hurtPlayer = true;
                 vfx.transform.SetParent(null);
