@@ -31,7 +31,7 @@ public class ShopScript : MonoBehaviour
 
     void UpdateCreditText()
     {
-        creditsText.text = "Available Credits: $" + player.money.ToString(); 
+        creditsText.text = " Crystals: " + player.money.ToString(); 
     }
 
 
