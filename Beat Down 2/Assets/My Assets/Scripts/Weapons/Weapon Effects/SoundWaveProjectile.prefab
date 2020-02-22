@@ -4809,11 +4809,13 @@ MonoBehaviour:
   damage: 10
   muzzlePrefab: {fileID: 1964938012343455134, guid: d1574c9db52e23e43bef9536150251b9,
     type: 3}
-  hitPrefab: {fileID: 1608462271211279001, guid: 2fd564e6c97088d44a5b4b849871c560,
+  hitPrefab: {fileID: 1608462271211279001, guid: 653312ddad9499e48bb3cd342d02de1a,
     type: 3}
   creator: {fileID: 0}
   hurtPlayer: 0
   stop: 0
+  piercing: 0
+  life: 0
 --- !u!65 &8910960280412651468
 BoxCollider:
   m_ObjectHideFlags: 0
