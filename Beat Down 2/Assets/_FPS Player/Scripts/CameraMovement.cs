@@ -20,11 +20,13 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private Vector2 targetCharacterDirection;
 
+    public ShopScript shop;
+
     void Start()
     {
         // Set target direction to the camera's initial orientation.
         targetDirection = transform.localRotation.eulerAngles;
-        
+        shop = FindObjectOfType<ShopScript>();
         // Set target direction for the character body to its inital state.
         if (characterBody)
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
@@ -33,7 +35,14 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         // Ensure the cursor is always locked when set
-        Cursor.lockState = CursorLockMode.Locked;
+        if (!shop.shopInterface.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
 
         // Allow the script to clamp based on a desired target value.
         var targetOrientation = Quaternion.Euler(targetDirection);

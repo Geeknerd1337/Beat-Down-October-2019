@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
             ChangeWeapon();
         }
         UpdateComboText();
+        playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
     }
 
 

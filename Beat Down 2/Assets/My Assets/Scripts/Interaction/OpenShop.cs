@@ -6,10 +6,11 @@ public class OpenShop : Interaction
 {
 
     public GameObject UI;
+    public ShopScript s;
     // Start is called before the first frame update
     void Start()
     {
-        
+        s = FindObjectOfType<ShopScript>();
     }
 
     // Update is called once per frame
@@ -20,9 +21,6 @@ public class OpenShop : Interaction
 
     public override void interaction()
     {
-        UI.SetActive(true);
-        FindObjectOfType<PlayerController>().enabled = false;
-        FindObjectOfType<CameraMovement>().enabled = false;
-        Cursor.lockState = CursorLockMode.None;
+        s.ChangeState();
     }
 }

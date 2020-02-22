@@ -44,6 +44,8 @@ public class ShopScript : MonoBehaviour
             fps.enabled = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            FindObjectOfType<CameraMovement>().enabled = false;
+            FindObjectOfType<PlayerController>().enabled = false;
 
         }
         else
@@ -51,6 +53,8 @@ public class ShopScript : MonoBehaviour
             fps.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            FindObjectOfType<CameraMovement>().enabled = true;
+            FindObjectOfType<PlayerController>().enabled = true;
         }
     }
 }

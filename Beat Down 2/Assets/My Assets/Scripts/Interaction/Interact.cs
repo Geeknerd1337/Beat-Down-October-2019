@@ -19,7 +19,7 @@ public class Interact : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && playerController.enabled)
+        if ((Input.GetKeyDown(KeyCode.E) && playerController.enabled))
         {
 
                 InteractWith();
