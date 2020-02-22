@@ -21,7 +21,7 @@ public class SongManager : MonoBehaviour
             else
             {
                 ManagerInstance = this;
-                DontDestroyOnLoad(this.gameObject);
+                //DontDestroyOnLoad(this.gameObject);
             }
     }
     #endregion

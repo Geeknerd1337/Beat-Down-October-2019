@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
         else
         {
             WaveManagerInstance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
     }
     #endregion

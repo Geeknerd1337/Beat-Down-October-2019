@@ -42,7 +42,7 @@ MonoBehaviour:
     value: 0
   fastMode:
     overrideState: 0
-    value: 0
+    value: 1
 --- !u!114 &114246800060683832
 MonoBehaviour:
   m_ObjectHideFlags: 3

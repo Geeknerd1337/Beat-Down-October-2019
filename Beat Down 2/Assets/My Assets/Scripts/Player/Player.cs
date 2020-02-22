@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
@@ -27,6 +28,14 @@ public class Player : MonoBehaviour
     public float comboTime;
     public float comboTimer;
 
+
+
+    [Header("Death Effects")]
+    public PostProcessVolume volume;
+    public ChromaticAberration chromaticAberration;
+    private float deathTimer;
+    public float deathTime;
+    public AudioSource deathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +55,10 @@ public class Player : MonoBehaviour
         {
             guns.RemoveAt(1);
         }
+
+        volume = FindObjectOfType<PostProcessVolume>();
+        volume.profile.TryGetSettings(out chromaticAberration);
+        chromaticAberration.intensity.value = 0;
     }
 
     // Update is called once per frame
@@ -59,6 +72,20 @@ public class Player : MonoBehaviour
         }
         UpdateComboText();
         playerHealth = Mathf.Clamp(playerHealth, 0, playerMaxHealth);
+
+        if(playerHealth <= 0)
+        {
+            deathTimer += Time.deltaTime;
+            if (!deathSound.isPlaying)
+            {
+                deathSound.Play();
+            }
+            chromaticAberration.intensity.value = Mathf.Lerp(0,2f,deathTimer/deathTime);
+            if(deathTimer > deathTime)
+            {
+                SceneManager.LoadScene("DeathScene");
+            }
+        }
     }
 
 

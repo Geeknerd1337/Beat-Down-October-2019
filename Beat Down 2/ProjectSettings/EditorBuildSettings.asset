@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TestScene2.unity
     guid: f16036ba43bafcf4798fe039ec3044c7
+  - enabled: 1
+    path: Assets/My Assets/DeathScene.unity
+    guid: 215b629af7854a24b988ab003111480c
   m_configObjects: {}
