@@ -110,10 +110,10 @@ public class WaveManager : MonoBehaviour
 
     void ChooseNewSynth()
     {
-        if (SongManager.ManagerInstance.beatFull && (SongManager.ManagerInstance.beatCount) % 32 == 0 && !coroutineRunning && ambience.volume == 0)
+        if (SongManager.ManagerInstance.beatFull && (SongManager.ManagerInstance.beatCount - 1) % 32 == 0 && !coroutineRunning && ambience.volume == 0)
         {
 
-
+            Debug.Log(SongManager.ManagerInstance.beatCount);
             if (mainMelody[2].volume == 1)
             {
 
