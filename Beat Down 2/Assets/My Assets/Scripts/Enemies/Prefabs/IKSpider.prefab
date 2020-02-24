@@ -129,6 +129,7 @@ MonoBehaviour:
   partSystem: {fileID: 88555782921740248}
   parent: {fileID: 88555782653192188}
   gem: {fileID: 186296152650139073, guid: 8c92c67211e97a342bf62aaf927b09f9, type: 3}
+  scoreValue: 10
 --- !u!1 &88555781220860468
 GameObject:
   m_ObjectHideFlags: 0

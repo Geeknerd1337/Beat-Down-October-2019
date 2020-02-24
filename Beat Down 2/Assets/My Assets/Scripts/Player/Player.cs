@@ -79,11 +79,12 @@ public class Player : MonoBehaviour
             if (!deathSound.isPlaying)
             {
                 deathSound.Play();
+                
             }
             chromaticAberration.intensity.value = Mathf.Lerp(0,2f,deathTimer/deathTime);
             if(deathTimer > deathTime)
             {
-                SceneManager.LoadScene("DeathScene");
+                StartCoroutine(LoadYourAsyncScene());
             }
         }
     }
@@ -185,10 +186,26 @@ public class Player : MonoBehaviour
         {
             if(combo > 0)
             {
-                combo--;
+                combo = 0;
                 SongManager.ManagerInstance.CreateComboNum();
             }
             //comboTimer = 0;
+        }
+    }
+
+    IEnumerator LoadYourAsyncScene()
+    {
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
+        // a sceneBuildIndex of 1 as shown in Build Settings.
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("DeathScene");
+
+        // Wait until the asynchronous scene fully loads
+        while (deathTimer < deathTime)
+        {
+            yield return null;
         }
     }
 }

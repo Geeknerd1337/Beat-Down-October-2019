@@ -13,6 +13,7 @@ public class Target : MonoBehaviour
     public GameObject parent;
     public GameObject gem;
     private AudioSource deathSound;
+    public float scoreValue;
 
 
     // Start is called before the first frame update
@@ -69,6 +70,7 @@ public class Target : MonoBehaviour
         Destroy(partSystem, 6f);
         Destroy(parent);
         WaveManager.WaveManagerInstance.enemyCount--;
+        GameManager.GameManagerInstance.score += FindObjectOfType<Player>().combo * scoreValue;
 
     }
 }
