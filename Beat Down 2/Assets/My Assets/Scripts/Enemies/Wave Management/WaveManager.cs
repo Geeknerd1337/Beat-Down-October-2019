@@ -73,7 +73,7 @@ public class WaveManager : MonoBehaviour
             a.volume = 0;
         }
         ambience.volume = 1;
-        StartWaveMusic();
+        //StartWaveMusic();
 
     }
 

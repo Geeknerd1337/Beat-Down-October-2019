@@ -1299,6 +1299,7 @@ MonoBehaviour:
   - {fileID: 1526201711}
   bassAlts:
   - {fileID: 1958711454}
+  - {fileID: 1289899727}
   breakDown:
   - {fileID: 285503876}
   - {fileID: 748522971}
@@ -119836,6 +119837,7 @@ MonoBehaviour:
   - {fileID: 503474883}
   - {fileID: 1777266507}
   - {fileID: 1526201711}
+  - {fileID: 1958711454}
   - {fileID: 285503876}
   - {fileID: 748522971}
   - {fileID: 1289899727}
