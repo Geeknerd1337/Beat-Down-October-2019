@@ -41,8 +41,11 @@ public class WaveManager : MonoBehaviour
     private int index;
     private bool canWait = false;
 
+
+    //Controls the songs, breakdowns, and what not
     [Header("Song Control")]
     public List<AudioSource> mainMelody;
+    public List<AudioSource> bassAlts;
     public List<AudioSource> breakDown;
     public AudioSource ambience;
 
@@ -50,11 +53,18 @@ public class WaveManager : MonoBehaviour
     public GameObject UI;
     private bool textSpawned = false;
 
+    private bool coroutineRunning;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach(AudioSource a in mainMelody)
+        coroutineRunning = false;
+        foreach (AudioSource a in mainMelody)
+        {
+            a.volume = 0;
+        }
+        foreach (AudioSource a in bassAlts)
         {
             a.volume = 0;
         }
@@ -63,13 +73,59 @@ public class WaveManager : MonoBehaviour
             a.volume = 0;
         }
         ambience.volume = 1;
+        StartWaveMusic();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        ChooseNewBass();
+        //ChooseNewSynth();
         
+    }
+
+
+    void ChooseNewBass()
+    {
+        if (SongManager.ManagerInstance.beatFull && (SongManager.ManagerInstance.beatCount) % 32 == 0 && !coroutineRunning && ambience.volume == 0)
+        {
+
+
+                if (mainMelody[0].volume == 1)
+                {
+                    if (Random.value < 0.333)
+                    {
+                        mainMelody[0].volume = 0;
+                        bassAlts[0].volume = 1;
+                    }
+                }
+                else
+                {
+                    mainMelody[0].volume = 1;
+                    bassAlts[0].volume = 0;
+                }
+        }
+    }
+
+    void ChooseNewSynth()
+    {
+        if (SongManager.ManagerInstance.beatFull && (SongManager.ManagerInstance.beatCount) % 32 == 0 && !coroutineRunning && ambience.volume == 0)
+        {
+
+
+            if (mainMelody[2].volume == 1)
+            {
+
+                    mainMelody[2].volume = 0;
+                    bassAlts[1].volume = 1;
+            }
+            else
+            {
+                mainMelody[2].volume = 1;
+                bassAlts[1].volume = 0;
+            }
+        }
     }
 
     IEnumerator ChangeVolume(AudioSource a, float f)
@@ -77,17 +133,20 @@ public class WaveManager : MonoBehaviour
 
         while (a.volume != f)
         {
+            coroutineRunning = true;
             yield return new WaitForSeconds(Time.deltaTime);
             a.volume = Approach(a.volume, f, Time.deltaTime/3f);
             if(a.volume == f)
             {
-                yield break;
+                coroutineRunning = false;
+                yield break;   
             }
         }
     }
 
     public void StartWaveMusic()
     {
+
         foreach (AudioSource a in mainMelody)
         {
             StartCoroutine(ChangeVolume(a, 1f));
@@ -98,6 +157,10 @@ public class WaveManager : MonoBehaviour
     public void EndWaveMusic()
     {
         foreach (AudioSource a in mainMelody)
+        {
+            StartCoroutine(ChangeVolume(a, 0f));
+        }
+        foreach (AudioSource a in bassAlts)
         {
             StartCoroutine(ChangeVolume(a, 0f));
         }

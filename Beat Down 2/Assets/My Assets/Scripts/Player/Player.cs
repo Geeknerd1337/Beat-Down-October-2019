@@ -36,6 +36,11 @@ public class Player : MonoBehaviour
     private float deathTimer;
     public float deathTime;
     public AudioSource deathSound;
+
+    public bool goToNextLevel;
+    private float goTimer;
+    public float goTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +64,8 @@ public class Player : MonoBehaviour
         volume = FindObjectOfType<PostProcessVolume>();
         volume.profile.TryGetSettings(out chromaticAberration);
         chromaticAberration.intensity.value = 0;
+
+        goToNextLevel = false;
     }
 
     // Update is called once per frame
@@ -84,7 +91,22 @@ public class Player : MonoBehaviour
             chromaticAberration.intensity.value = Mathf.Lerp(0,2f,deathTimer/deathTime);
             if(deathTimer > deathTime)
             {
-                StartCoroutine(LoadYourAsyncScene());
+                SceneManager.LoadScene("DeathScene");
+            }
+        }
+
+        if (goToNextLevel)
+        {
+            goTimer += Time.deltaTime;
+            if (!deathSound.isPlaying)
+            {
+                deathSound.Play();
+
+            }
+            chromaticAberration.intensity.value = Mathf.Lerp(0, 2f, goTimer / goTime);
+            if (goTimer > goTime)
+            {
+                SceneManager.LoadScene("WinScene");
             }
         }
     }
@@ -208,4 +230,6 @@ public class Player : MonoBehaviour
             yield return null;
         }
     }
+
+
 }

@@ -11,7 +11,8 @@ public class FallOffMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        p.Play();
+        a.Play();
     }
 
     // Update is called once per frame
