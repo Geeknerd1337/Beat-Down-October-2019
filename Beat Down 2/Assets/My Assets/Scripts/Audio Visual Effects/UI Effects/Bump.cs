@@ -16,7 +16,7 @@ public class Bump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, origScale, 0.3f);
+        transform.localScale = Vector3.Lerp(transform.localScale, origScale, 10f * Time.deltaTime);
 
         if (SongManager.ManagerInstance.beatFull)
         {
