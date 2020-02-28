@@ -116114,6 +116114,14 @@ PrefabInstance:
       propertyPath: gravity
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
+      propertyPath: grounded
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149800568, guid: c2dc14f109b09a743b03757ef68006c7, type: 3}
+      propertyPath: antiBumpFactor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7085721664118310501, guid: c2dc14f109b09a743b03757ef68006c7,
         type: 3}
       propertyPath: m_SlopeLimit
