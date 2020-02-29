@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private Vector2 clampInDegrees = new Vector2(360, 180);
     [SerializeField]
-    private Vector2 sensitivity = new Vector2(2, 2);
+    public Vector2 sensitivity = new Vector2(2, 2);
     [SerializeField]
     private Vector2 smoothing = new Vector2(3, 3);
     [SerializeField]
@@ -21,12 +21,14 @@ public class CameraMovement : MonoBehaviour
     private Vector2 targetCharacterDirection;
 
     public ShopScript shop;
+    public Settings setting;
 
     void Start()
     {
         // Set target direction to the camera's initial orientation.
         targetDirection = transform.localRotation.eulerAngles;
         shop = FindObjectOfType<ShopScript>();
+        setting = FindObjectOfType<Settings>();
         // Set target direction for the character body to its inital state.
         if (characterBody)
             targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
@@ -35,7 +37,7 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         // Ensure the cursor is always locked when set
-        if (!shop.shopInterface.activeSelf)
+        if (!shop.shopInterface.activeSelf && !setting.open)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
